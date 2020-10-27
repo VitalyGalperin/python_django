@@ -8,6 +8,14 @@ def advertisements_list(request, *args, **kwargs):
     return render(request, 'advertisement/advertisements_list.html', {})
 
 
+def ad_1(request, *args, **kwargs):
+    return render(request, 'advertisement/ad_1.html', {})
+
+
+def ad_2(request, *args, **kwargs):
+    return render(request, 'advertisement/ad_2.html', {})
+
+
 def advertisement(request, *args, **kwargs):
     return HttpResponse(
         '<h2>Создание сайтов на коленке</h2>'
@@ -15,5 +23,6 @@ def advertisement(request, *args, **kwargs):
         'Также можем создать сайт на любой другой части тела в пределах дозволенного.<br>'
         'Мастера Давид и Михаэль из Ашдода.     אשדוד, ישראלת</p>'
         '<p><u>+972-50-76-777-77</u>  !!!  Звоните  !!!</p>'
+        # '<a href="ad_2.html">Система контроля версий Git</a>'
 
     )
