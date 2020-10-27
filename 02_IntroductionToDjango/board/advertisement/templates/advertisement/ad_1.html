@@ -1,7 +1,9 @@
 <!DOCTYPE html>
+{% load staticfiles %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static "css/img.css" %}" />
     <title></title>
 </head>
 <body>
@@ -11,8 +13,8 @@
 </h2>
 
 <p><b>Цена: <u>100 000 рублей</u></b></p>
-<img src="../img/1.png" alt="Мой сертификат об окончании курса"/>
-<a href=".">Главная</a>
+<img src="{% static "img/Виталий Гальперин.png" %}" alt="Мой сертификат об окончании курса" >
+<p><a href=".">Главная</a></p>
 
 </body>
 </html>
