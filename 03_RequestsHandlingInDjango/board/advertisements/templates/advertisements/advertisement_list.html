@@ -1,7 +1,21 @@
-<html>
-<ul>
-    <li>Мастер на час</li>
-    <li>Выведение из запоя</li>
-    <li>Услуги экскаватора-погрузчика, гидромолота, ямобура</li>
-</ul>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Объявления</title>
+</head>
+<body>
+
+<p>Объявления</p>
+    <ul>
+    {% for advertisement in advertisements %}
+        <li>{{ advertisement }}</li>
+    {% endfor %}
+    </ul>
+
+<p><a href="/contacts">Контакты</a></p>
+<p><a href="/about">О компании</a></p>
+<p><a href="/categories">Категории объявлений</a></p>
+<p><a href="/regions">Регионы</a></p>
+</body>
 </html>

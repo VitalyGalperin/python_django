@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Категории объявлений</title>
+</head>
+<body>
+
+<p>Категории объявлений:</p>
+
+{% for categorie in categories_list %}
+    {{ categorie }} <br>
+{% endfor %}
+
+<p><a href=".">Главная</a></p>
+
+</body>
+</html>
