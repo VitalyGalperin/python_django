@@ -6,16 +6,36 @@
 </head>
 <body>
 
-<p>Объявления</p>
+<nav>
     <ul>
-    {% for advertisement in advertisements %}
+        <li><a href="/contacts">Контакты</a></li>
+        <li><a href="/about">О компании</a></li>
+        <li><a href="/categories">Категории объявлений</a></li>
+        <li><a href="/regions">Регионы</a></li>
+    </ul>
+</nav>
+
+<h2>Объявления</h2>
+<h3>Услуги</h3>
+    <ul>
+    {% for advertisement in service_advertisements %}
         <li>{{ advertisement }}</li>
     {% endfor %}
     </ul>
 
-<p><a href="/contacts">Контакты</a></p>
-<p><a href="/about">О компании</a></p>
-<p><a href="/categories">Категории объявлений</a></p>
-<p><a href="/regions">Регионы</a></p>
+<h3>Дома на продажу</h3>
+    <ul>
+    {% for advertisement in house_advertisements %}
+        <li>{{ advertisement }}</li>
+    {% endfor %}
+    </ul>
+
+<h3>Велосипеды и запчасти</h3>
+    <ul>
+    {% for advertisement in bicycle_advertisements %}
+        <li>{{ advertisement }}</li>
+    {% endfor %}
+    </ul>
+
 </body>
 </html>
