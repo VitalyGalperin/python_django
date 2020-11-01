@@ -1,16 +1,8 @@
 from django.shortcuts import render
 from django.views import View
 from django.views.generic import TemplateView
-
-
-class Regions(View):
-    def get(self, request):
-        regions_list = ['Нижний Новгород', 'Нижегородская область', 'Москва', 'Московская область']
-        return render(request, 'advertisements/regions.html', {'regions_list': regions_list})
-
-    def post(self, request):
-        regions_list = ['Регион успешно создан']
-        return render(request, 'advertisements/regions.html', {'regions_list': regions_list})
+from .forms import ChoiceForm, AdvertisementForm
+from .settings import SERVICE_ADVERTISEMENTS, BICYCLE_ADVERTISEMENTS, HOUSE_ADVERTISEMENTS, REGION_LIST, CATEGORIES_LIST
 
 
 class About(TemplateView):
@@ -27,81 +19,63 @@ class About(TemplateView):
         reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat
         non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
         """
-        return  context
+        return context
 
 
-def about(request, *args, **kwargs):
-    about_dict = {'name': 'Бесплатные объявления', 'description': 'Бесплатные объявления в вашем городе!'}
-    return render(request, 'advertisements/about.html', about_dict)
+class Contacts(TemplateView):
+    template_name = 'advertisements/contacts.html'
 
-
-def contacts(request, *args, **kwargs):
-    contact_details = ['Phone: +972-50-76-789-75',
-                       'email: vitalygl@yandex.ru']
-    return render(request, 'advertisements/contacts.html', {'contact_details': contact_details})
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['phone'] = '+972-50-76-789-75'
+        context['email'] = 'vitalygl@yandex.ru'
+        context['address1'] = 'Московское шоссе 29/132, Нижний Новгород, Нижегородская область, Россия, 603116'
+        context['address2'] = 'st. Hativat Golani 3309/16,  Eilat, Israel, 8852600'
+        return context
 
 
 def categories(request, *args, **kwargs):
-    categories_list = ['Услуги', 'Дома на продажу', 'Велосипеды и запчасти']
-    return render(request, 'advertisements/categories.html', {'categories_list': categories_list})
+    return render(request, 'advertisements/categories.html', {'categories_list': CATEGORIES_LIST})
 
 
-def advertisement_list(request, *args, **kwargs):
-    service_advertisements = [
-        """
-        Предлагаю услуги классического массажа и баночного массажа. Помогу снять напряжение в теле, оздоровить спину
-        и расслабиться. Общий массаж - длительность 90 минут, возможны и другие варианты. Принимаю в районе беговой на
-        дому, но также возможен выезд.
-        """,
-        """
-        Предлагаю услугу электроэпиляции (ТЕРМОЛИЗ), помогающая НАВСЕГДА избавиться от нежелательных волос по всему 
-        телу. Стаж- 13 лет непрерывной и насыщенной работы в этой сфере. Есть медицинское образование. Можем с Вами
-        ассмотреть и выбрать для Вас самый комфортный вид обезболивания из всех существующих. Иглы( вольфрамовая нить)
-        - одноразовые, все СТЕРИЛЬНО!!!Цена указана за один час работы( минималка). Делаю на дому( Вы ко мне или я к Вам).
-        """,
-        """
-        Певец и Диджей в одном лице (без посредников и агентств) на Вашу Свадьбу, Юбилей, Торжество, Корпоративное
-         Мероприятие, Новогодний праздник. Огромный выбор музыкального материала, все стили и направления музыки. 
-         Живой вокал
-        """
-    ]
+class Regions(View):
+    def get(self, request):
+        return render(request, 'advertisements/regions.html', {'region_list': REGION_LIST})
 
-    bicycle_advertisements = [
-        'Велосипед детский STELS DOLPHIN. Б/У состояние хорошее, полностью рабочий. Разумный торг возможен.',
-        """
-        Комплект 24х колёс. 72 спицы. Переднее колесо на покрышке wanda 3.0. Размер по осям 100мм. Заднее колесо с 
-        ножным тормозом, на покрышке kenda 3.0/ Размер по осям 120мм
-        """,
-        """
-        Электрический велосипед ECO DRIVE SPORT благодаря электродвигателю мощностью 500W развивает максимальную скорость
-        до 40 км/ч. Съемная Li-ion аккумуляторная батарея с напряжением 48V и емкостью 13 Ah позволяет преодолеть 
-        расстояние в режиме ассистент (при использовании педалей) до 70-100 км, только на ручке газа до 40-50 км. 
-        Крепкая рама велосипеда выдерживает нагрузку до 120 кг. Кроме всего прочего велосипед оборудован дисковыми
-        механическими тормозами, задним переключателем - 8 скоростей, передним переключателем - 3 скорости, багажником и
-        фронтальной фарой.'
-        """
-    ]
-
-    house_advertisements = [
-        """
-        Дом в 2 этажа в новом коттеджном поселке! СКИДКА 700 000 рублей! Стоимость указана с учетом скидки. Удобное
-        месторасположение за супермаркетом «Лента» на ул. Родионова (490 метров от ОСТАНОВКИ ул. Родионова). Дом сдан, 
-        документы готовы к сделке! Общая площадь 114 кв. Без отделки, стоимость составит 11 490 000 руб.',
-        """,
-        """
-        Продаю сад в СТ "Ясная поляна".Своя питьевая скважина.На участке 2 дома.Один деревянный, другой из пеноблока 
-        2-х этажный. В доме холодная, горячая вода, санузел, теплые полы.На первом этаже на полу выложена плитка. 
-        Ремонт не требуется.Есть яблони и кустарники, малина. Рядом лес.В перспективе будут проводить газ и можно будет
-        прописаться. Торг. Срочно.',
-        """,
-        """
-        Продаётся 1/2 дома и земли. В привлекательном месте Нижнего Новгорода, в непосредственной близости набережной
-        Гребного канала в Печёрской Слободе. Первая линия.
-                """
-    ]
-
-    advertisements = {'service_advertisements': service_advertisements,
-                      'bicycle_advertisements': bicycle_advertisements, 'house_advertisements': house_advertisements, }
-    return render(request, 'advertisements/advertisement_list.html', advertisements)
+    def post(self, request):
+        regions_list = ['Регион успешно создан']
+        return render(request, 'advertisements/regions.html', {'region_list': regions_list})
 
 
+class IndexPage(View):
+    def get(self, request):
+        choice_form = ChoiceForm()
+        choice_message = ''
+        context = {'choice_form': choice_form, 'choice_message': choice_message}
+        return render(request, 'advertisements/index.html', context)
+
+    def post(self, request):
+        choice_form = ChoiceForm(request.POST)
+        choice_message = ''
+        if choice_form.is_valid():
+            choice_message = 'Данные успешно выбраны'
+        context = {'choice_form': choice_form, 'choice_message': choice_message}
+        return render(request, 'advertisements/index.html', context)
+
+
+class Advertisements(View):
+    def get(self, request):
+        context = {'service_advertisements': SERVICE_ADVERTISEMENTS,
+                   'bicycle_advertisements': BICYCLE_ADVERTISEMENTS,
+                   'house_advertisements': HOUSE_ADVERTISEMENTS}
+        return render(request, 'advertisements/advertisements.html', context)
+
+    def post(self, request):
+        post_form = AdvertisementForm()
+        message = ['запрос на создание новой записи успешно выполнен']
+        context = {'service_advertisements': SERVICE_ADVERTISEMENTS,
+                   'bicycle_advertisements': BICYCLE_ADVERTISEMENTS,
+                   'house_advertisements': HOUSE_ADVERTISEMENTS,
+                   'message': message,
+                   'post_form': post_form}
+        return render(request, 'advertisements/advertisements.html', context)

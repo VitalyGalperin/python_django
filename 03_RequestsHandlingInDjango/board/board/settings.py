@@ -49,6 +49,7 @@ MIDDLEWARE = [
     # 'board.middleware.filter_id_middleware.WhiteListIPMiddleware',  # task 1 lesson 3.3
     # 'board.middleware.filter_id_middleware.BlackListIPMiddleware',  # task 2 lesson 3.3
     # 'board.middleware.filter_id_middleware.DelayIPMiddleware',  # task 3 lesson 3.3
+    'board.middleware.filter_id_middleware.LogWriter',
 ]
 
 ROOT_URLCONF = 'board.urls'
