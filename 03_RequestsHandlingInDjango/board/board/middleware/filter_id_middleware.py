@@ -18,7 +18,6 @@ class WhiteListIPMiddleware:  # task 1 lesson 3.3
             raise PermissionDenied
 
         response = self.get_response(request)
-
         return response
 
 
@@ -33,7 +32,6 @@ class BlackListIPMiddleware:  # task 2 lesson 3.3
             raise PermissionDenied
 
         response = self.get_response(request)
-
         return response
 
 
@@ -47,7 +45,6 @@ class DelayIPMiddleware:  # task 3 lesson 3.3
         if self.count % DELAY_NUMBER == 0:
             time.sleep(DELAY_TIME)
         response = self.get_response(request)
-
         return response
 
 
@@ -62,5 +59,4 @@ class LogWriter:
         with open(log_path, mode='a', encoding='utf8') as file:
             split_request = str(request).split(' ')
             file.write(f'{datetime.datetime.now()};  {split_request[1]}  {split_request[2][:-1]}\n')
-
         return response

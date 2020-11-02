@@ -40,8 +40,8 @@
 
     <form  method="post">
         {% csrf_token %}
-{#        <p>Выполнено запросов {{ post_form.counter }}</p>#}
         <p><button type="submit">Найти</button></p>
+        <h3>{{ choice_message }}</h3>
     </form>
 
 <p><a href="/">Главная</a></p>

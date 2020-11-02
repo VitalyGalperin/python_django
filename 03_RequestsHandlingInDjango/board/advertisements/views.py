@@ -2,7 +2,22 @@ from django.shortcuts import render
 from django.views import View
 from django.views.generic import TemplateView
 from .forms import ChoiceForm, AdvertisementForm
-from .settings import SERVICE_ADVERTISEMENTS, BICYCLE_ADVERTISEMENTS, HOUSE_ADVERTISEMENTS, REGION_LIST, CATEGORIES_LIST
+from .settings import SERVICE_ADVERTISEMENTS, BICYCLE_ADVERTISEMENTS, HOUSE_ADVERTISEMENTS, CATEGORIES_LIST, REGION_LIST
+
+
+class Count:
+    def __init__(self):
+        self.counter = 0
+
+    def __iter__(self):
+        return self
+
+    def __next__(self):
+        self.counter += 1
+        return self.counter
+
+
+count = Count()
 
 
 class About(TemplateView):
@@ -57,9 +72,10 @@ class IndexPage(View):
     def post(self, request):
         choice_form = ChoiceForm(request.POST)
         choice_message = ''
+        post_count = next(count)
         if choice_form.is_valid():
             choice_message = 'Данные успешно выбраны'
-        context = {'choice_form': choice_form, 'choice_message': choice_message}
+        context = {'choice_form': choice_form, 'choice_message': choice_message, 'post_count': post_count}
         return render(request, 'advertisements/index.html', context)
 
 
@@ -76,6 +92,9 @@ class Advertisements(View):
         context = {'service_advertisements': SERVICE_ADVERTISEMENTS,
                    'bicycle_advertisements': BICYCLE_ADVERTISEMENTS,
                    'house_advertisements': HOUSE_ADVERTISEMENTS,
-                   'message': message,
-                   'post_form': post_form}
+                   'message': message
+                   }
         return render(request, 'advertisements/advertisements.html', context)
+
+
+
