@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Объявления</title>
+</head>
+<body>
+    <h1>Объявления</h1>
+
+    {% if advertisements %}
+        <ul>
+            {% for advertisement in advertisements %}
+                <li>
+                    {{ advertisement.title }} (Цена: {{ advertisement.price }}) руб.
+                    <p>
+                        Дата создания: {{ advertisement.created_at }}
+                    </p>
+                    <p>
+                        количество просмотров: {{ advertisement.views_count }}
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>Объявлений нет</p>
+    {% endif %}
+
+    <p><a href="/random">Случайное объявление</a></p>
+    <p><a href="/1">1</a></p>
+
+</body>
+</html>
