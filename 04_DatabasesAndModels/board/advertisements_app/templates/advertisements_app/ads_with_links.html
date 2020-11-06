@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -11,12 +10,21 @@
         <ul>
             {% for advertisement in advertisements %}
                 <li>
+                    <h4>
+                        {{ advertisement.advertisement_type }}
+                    </h4>
+                    <p>
                     {{ advertisement.title }} (Цена: {{ advertisement.price }}) руб.
+                    </p>
+                    <p>
+                        Статус: {{ advertisement.advertisement_status }}
+                    </p>
                     <p>
                         Дата создания: {{ advertisement.created_at }}
                     </p>
                     <p>
                         количество просмотров: {{ advertisement.views_count }}
+                    </p>
                 </li>
             {% endfor %}
         </ul>
@@ -25,7 +33,7 @@
     {% endif %}
 
     <p><a href="/random">Случайное объявление</a></p>
-    <p><a href="/ads_with_links">Объявления со связями</a></p>
+<p><a href="/">Главная</a></p>
 
 </body>
 </html>

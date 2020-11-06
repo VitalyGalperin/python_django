@@ -17,7 +17,8 @@ def random(request, *args, **kwargs):
     return render(request, 'advertisements_app/random.html', content)
 
 
-def page1(request, *args, **kwargs):
+def ads_with_links(request, *args, **kwargs):
     advertisements = Advertisement.objects.all()
+    print(advertisements)
     content = {'advertisements': advertisements}
-    return render(request, 'advertisements_app/1.html', content)
+    return render(request, 'advertisements_app/ads_with_links.html', content)
