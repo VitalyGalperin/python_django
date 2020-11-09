@@ -4,16 +4,18 @@ from django.db import models
 
 
 class Advertisement(models.Model):
-    title = models.CharField(max_length=1500)
+    title = models.CharField(max_length=1500, db_index=True)
     description = models.TextField(default='', null=True, verbose_name='Описание')
     price = models.FloatField(null=True, verbose_name='Цена')
-    created_at = models.DateTimeField(auto_now_add=True)
-    update_at = models.DateTimeField(auto_now=True)
+    created_at = models.DateTimeField(auto_now_add=True, db_index=True)
+    finish_at = models.DateTimeField(auto_now=True)
     views_count = models.IntegerField(default=0, verbose_name='Количество просмотров')
-    advertisement_status = models.ForeignKey('Status', default=None, null=True, on_delete=models.CASCADE,
-                                             related_name='ad_status')
-    advertisement_type = models.ForeignKey('AdvertisementType', default=None, null=True, on_delete=models.CASCADE,
+    advertisement_heading = models.ForeignKey('Heading', default=None, null=True, on_delete=models.CASCADE,
+                                              related_name='ad_status')
+    advertisement_type = models.ForeignKey('Type', default=None, null=True, on_delete=models.CASCADE,
                                            related_name='ad_type')
+    advertisement_author = models.ForeignKey('Author', default=None, null=True, on_delete=models.CASCADE,
+                                             related_name='ad_author')
 
     def __str__(self):
         return self.title
@@ -23,18 +25,18 @@ class Advertisement(models.Model):
         verbose_name_plural = 'Объявления'
 
 
-class Status(models.Model):
+class Heading(models.Model):
     advertisement_status = models.CharField(max_length=20)
 
     def __str__(self):
         return self.advertisement_status
 
     class Meta:
-        verbose_name = 'Статус'
-        verbose_name_plural = 'Статусы'
+        verbose_name = 'Рубрика'
+        verbose_name_plural = 'Рубрики'
 
 
-class AdvertisementType(models.Model):
+class Type(models.Model):
     advertisement_type = models.CharField(max_length=20)
 
     class Meta:
@@ -48,4 +50,12 @@ class AdvertisementType(models.Model):
 class Author(models.Model):
     first_name = models.CharField(max_length=15)
     last_name = models.CharField(max_length=25)
-    email = models.EmailField
+    email = models.EmailField(default='')
+    phone = models.CharField(max_length=20)
+
+    class Meta:
+        verbose_name = 'Автор'
+        verbose_name_plural = 'Авторы'
+
+    def __str__(self):
+        return self.last_name

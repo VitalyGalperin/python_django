@@ -1,13 +1,14 @@
 from random import randint
-
+import datetime
+from django.views.generic import ListView, DetailView
 from django.shortcuts import render
 from .models import Advertisement
 
 
-def advertisement_list(request, *args, **kwargs):
-    advertisements = Advertisement.objects.all()
+def main(request, *args, **kwargs):
+    advertisements = Advertisement.objects.all()[:3]
     content = {'advertisements': advertisements}
-    return render(request, 'advertisements_app/advertisements.html', content)
+    return render(request, 'advertisements_app/main.html', content)
 
 
 def random(request, *args, **kwargs):
@@ -17,8 +18,13 @@ def random(request, *args, **kwargs):
     return render(request, 'advertisements_app/random.html', content)
 
 
-def ads_with_links(request, *args, **kwargs):
-    advertisements = Advertisement.objects.all()
-    print(advertisements)
-    content = {'advertisements': advertisements}
-    return render(request, 'advertisements_app/ads_with_links.html', content)
+class AdsListView(ListView):
+    model = Advertisement
+    template_name = 'advertisements.html'
+    context_object_name = 'advertisements'
+    queryset = Advertisement.objects.all()[:5]
+
+
+class AdsDetailView(DetailView):
+    model = Advertisement
+
