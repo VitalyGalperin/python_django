@@ -28,3 +28,16 @@ class AdsListView(ListView):
 class AdsDetailView(DetailView):
     model = Advertisement
 
+
+def fill_db(request, *args, **kwargs):
+    for i in range(0, 100):
+        new_advertisement = Advertisement(title='Объявление ' + str(i),
+                                          description='Текст объявления' + str(i),
+                                          price=i,
+                                          created_at=datetime.datetime.now(),
+                                          finish_at=datetime.datetime.now() + datetime.timedelta(weeks=5),
+                                          views_count=i
+
+                                          )
+        new_advertisement.save()
+    return render(request, 'advertisements_app/fill_db.html')
