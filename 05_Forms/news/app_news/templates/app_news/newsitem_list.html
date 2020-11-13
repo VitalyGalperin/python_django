@@ -6,9 +6,8 @@
 </head>
 <body>
 
-<p><a href="/news">Новость с комментариями</a></p>
 <p><a href="/add_news">Добавить новость</a></p>
-<p><a href="/">Редактировать новость</a></p>
+
 
 
 <h1>Новости</h1>
@@ -18,9 +17,8 @@
         {% for newsitem in newsitems %}
             {% if newsitem.is_active %}
                 <li>
-                    <h4>
-                        <a href="/news/{{ newsitem.id }}">{{ newsitem.title }}</a>
-                    </h4>
+                    <h4><a href="/newsitems/{{ newsitem.id }}">{{ newsitem.title }}</a></h4>
+                    <p><a href="/edit_news/{{ newsitem.id }}">Редактировать новость</a></p>
                     <p>
                         {{ newsitem.description }}
                     </p>
@@ -30,6 +28,7 @@
                     <p>
                         Дата изменения: {{ newsitem.edit_at }}
                     </p>
+
                 </li>
             {% endif %}
         {% endfor %}

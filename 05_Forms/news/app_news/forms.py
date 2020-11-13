@@ -11,6 +11,13 @@ class AddNews(forms.ModelForm):
         fields = '__all__'
 
 
+class EditNews(forms.ModelForm):
+
+    class Meta:
+        model = NewsItem
+        fields = '__all__'
+
+
 class UserForm(forms.ModelForm):
     title = forms.TextInput()
     description = forms.Textarea()
