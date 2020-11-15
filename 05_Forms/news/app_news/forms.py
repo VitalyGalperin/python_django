@@ -1,6 +1,8 @@
 from django import forms
 import datetime
 from django.core.exceptions import ValidationError
+from django.forms import TextInput, Textarea
+
 from .models import NewsItem, Comment
 
 
@@ -11,15 +13,13 @@ class AddNews(forms.ModelForm):
 
 
 class EditNews(forms.ModelForm):
-    # title = forms.CharField(label='Название')
-    # description = forms.CharField(label='Название', widget=forms.Textarea)
-    # is_active =forms.BooleanField(initial=True, label='Активна')
+    title = forms.CharField(label='Название', widget=TextInput)
+    description = forms.CharField(label='Название', widget=Textarea)
+    is_active = forms.BooleanField(initial=True, label='Активна')
 
     class Meta:
         model = NewsItem
         fields = '__all__'
-
-
 
 
 # Пример формы с дополнительной валидацией
