@@ -7,18 +7,18 @@
 <body>
 <p><a href="/">Главная</a></p>
 
-<h1>{{ object.title }}</h1>
+<h1>{{ newsitems.title }}</h1>
 <ul>
-    <li><p>{{ object.description }}</p></li>
-    <li><p>Дата создания: {{ object.created_at }}</p></li>
-    <li><p>Дата изменения: {{ object.edit_at }}</p></li>
+    <li><p>{{ newsitems.description }}</p></li>
+    <li><p>Дата создания: {{ newsitems.created_at }}</p></li>
+    <li><p>Дата изменения: {{ newsitems.edit_at }}</p></li>
     <br>
-     {% for comment in object.all %}
+     {% for comment in newsitems.all %}
          <p>!!!!!!!!!!!!!!!!</p>
         <li><p>Автор комментария: {{ comment.user }}</p></li>
-        <li><p>Автор комментария: {{ object.comment_set.user }}</p></li>
-        <li><p>Автор комментария: {{ object.Comment_set.user }}</p></li>
-        <li><p>Автор комментария: {{ object.comment.user }}</p></li>
+        <li><p>Автор комментария: {{ newsitems.comment_set.user }}</p></li>
+        <li><p>Автор комментария: {{ newsitems.Comment_set.user }}</p></li>
+        <li><p>Автор комментария: {{ newsitems.comment.user }}</p></li>
         <li><p>Автор комментария: {{ object.news_fk.user }}</p></li>
         <li><p>Автор комментария: {{ object.news_link.user }}</p></li>
          <p>Комментарий: {{ comment.comment }}</p>

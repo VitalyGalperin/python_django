@@ -2,11 +2,11 @@ from django.db import models
 
 
 class NewsItem(models.Model):
-    title = models.CharField(max_length=150, db_index=True, verbose_name='Название')
+    title = models.CharField(max_length=150, default='', db_index=True, verbose_name='Название')
     description = models.TextField(default='', null=True, verbose_name='Содержание')
     created_at = models.DateTimeField(auto_now_add=True, db_index=True, verbose_name='Опубликована')
     edit_at = models.DateTimeField(auto_now=True, verbose_name='Изменена')
-    is_active = models.BooleanField(default=True, verbose_name='Активна')
+    is_active = models.BooleanField(default=True, null=True, verbose_name='Активна')
 
     def __str__(self):
         return self.title

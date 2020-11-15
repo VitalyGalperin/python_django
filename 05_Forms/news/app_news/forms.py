@@ -1,35 +1,29 @@
 from django import forms
 import datetime
 from django.core.exceptions import ValidationError
-from .models import User, NewsItem, Comment
+from .models import NewsItem, Comment
 
 
 class AddNews(forms.ModelForm):
-
     class Meta:
         model = NewsItem
         fields = '__all__'
 
 
 class EditNews(forms.ModelForm):
+    # title = forms.CharField(label='Название')
+    # description = forms.CharField(label='Название', widget=forms.Textarea)
+    # is_active =forms.BooleanField(initial=True, label='Активна')
 
     class Meta:
         model = NewsItem
         fields = '__all__'
 
 
-class UserForm(forms.ModelForm):
-    title = forms.TextInput()
-    description = forms.Textarea()
-    created_at = forms.DateTimeInput()
-    is_active = forms.BooleanField()
-
-    class Meta:
-        model = User
-        fields = '__all__'
 
 
-class UserFieldsForm(forms.Form):
+# Пример формы с дополнительной валидацией
+class UserFieldsForm(forms.ModelForm):
     username = forms.CharField(max_length=25)
     password = forms.CharField(max_length=25)
     first_name = forms.CharField(max_length=25)
