@@ -16,7 +16,7 @@ class NewsDetailView(DetailView):
     model = NewsItem
     template_name = 'app_news/newsitem_detail.html'
     context_object_name = 'newsitems'
-
+    #
     # a = Comment.objects.filter(news_fk_id=id)
     # print(a)
 
