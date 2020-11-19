@@ -1,7 +1,7 @@
-from django.shortcuts import render, redirect
-from django.views.generic import View, ListView, DetailView, UpdateView
-from django.http import HttpResponseRedirect, HttpResponseNotFound
-from .forms import AddNews, EditNews,  UserFieldsForm
+from django.shortcuts import render
+from django.views.generic import View, ListView, DetailView, UpdateView, CreateView
+from django.http import HttpResponseRedirect
+from .forms import EditNews,  UserFieldsForm
 from .models import User, NewsItem, Comment
 
 
@@ -21,43 +21,21 @@ class NewsDetailView(DetailView):
     # print(a)
 
 
-class AddNewsView(View):
-    def get(self, request):
-        news_form = EditNews
-        context = {'news_form': news_form}
-        return render(request, 'app_news/edit_news.html', context)
-
-    def post(self, request):
-        news_form = EditNews(request.POST)
-        if news_form.is_valid():
-            news_form.save()
-        return redirect('/')
+class AddNewsView(CreateView):
+    model = NewsItem
+    template_name = 'app_news/edit_news.html'
+    form_class = EditNews
+    success_url = '/'
 
 
 class EditNewsView(UpdateView):
     model = NewsItem
     template_name = 'app_news/edit_news.html'
     form_class = EditNews
-
-    context_object_name = 'news_form'
-
+    success_url = '/'
 
 # Удаление записей
 # NewsItem.objects.filter(title='').delete()
 
 
-class UserFormView(View):
-    def get(self, request):
-        user_form = UserFieldsForm()
-        content = {'user_form': user_form}
-        return render(request, 'app_news/register.html', content)
-
-    def post(self, request):
-        user_form = UserFieldsForm(request.POST)
-        content = {'user_form': user_form}
-
-        if user_form.is_valid():
-            User.objects.create(**user_form.cleaned_data)
-            return HttpResponseRedirect('/')
-        return render(request, 'app_news/register.html', content)
 

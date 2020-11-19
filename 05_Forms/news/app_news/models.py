@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 
 
 class NewsItem(models.Model):
@@ -10,6 +11,9 @@ class NewsItem(models.Model):
 
     def __str__(self):
         return self.title
+
+    def get_absolute_url(self):
+        return reverse('/', kwargs={'pk': self.pk})
 
     class Meta:
         verbose_name = 'Новость'
@@ -30,10 +34,3 @@ class Comment(models.Model):
         verbose_name_plural = 'Комментарии'
 
 
-class User(models.Model):
-    username = models.CharField(max_length=25)
-    password = models.CharField(max_length=25)
-    first_name = models.CharField(max_length=25)
-    last_name = models.CharField(max_length=25)
-    email = models.EmailField()
-    birthday = models.DateField()

@@ -8,9 +8,7 @@
     <p><a href="/">Главная</a></p>
     <form  method="post">
         {% csrf_token %}
-        <p>Заголовок новости {{ news_form.title }}</p>
-        <p>Текст новости {{ news_form.description }}</p>
-        <p>Активна {{ news_form.is_active }}</p>
+        {{ form.as_p }}
         <p><button type="submit">Сохранить</button></p>
     </form>
 
