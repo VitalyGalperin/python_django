@@ -1,8 +1,8 @@
-from django.shortcuts import render
+
 from django.views.generic import View, ListView, DetailView, UpdateView, CreateView
-from django.http import HttpResponseRedirect
-from .forms import EditNews,  UserFieldsForm
-from .models import User, NewsItem, Comment
+
+from .forms import EditNews
+from .models import NewsItem, Comment
 
 
 class NewsListView(ListView):
@@ -36,6 +36,7 @@ class EditNewsView(UpdateView):
 
 # Удаление записей
 # NewsItem.objects.filter(title='').delete()
+
 
 
 
