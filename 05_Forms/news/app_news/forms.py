@@ -17,7 +17,7 @@ class EditNews(forms.ModelForm):
         fields = '__all__'
 
 
-# Пример формы с дополнительной валидацией
+# Пример формы с дополнительной валидацией из лекции
 class UserFieldsForm(forms.ModelForm):
     username = forms.CharField(max_length=25)
     password = forms.CharField(max_length=25)

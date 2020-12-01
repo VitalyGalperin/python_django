@@ -16,9 +16,6 @@ class NewsDetailView(DetailView):
     model = NewsItem
     template_name = 'app_news/newsitem_detail.html'
     context_object_name = 'newsitems'
-    #
-    # a = Comment.objects.filter(news_fk_id=id)
-    # print(a)
 
 
 class AddNewsView(CreateView):
@@ -36,6 +33,15 @@ class EditNewsView(UpdateView):
 
 # Удаление записей
 # NewsItem.objects.filter(title='').delete()
+
+
+# обратная связь
+# news = NewsItem.objects.get(pk=25)
+# comment = news.news_link.all()
+# comment = news.news_set.all() # по умолчению, без related_name
+
+
+
 
 
 
