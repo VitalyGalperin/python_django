@@ -8,21 +8,15 @@
 <p><a href="/">Главная</a></p>
 
 <h1>{{ newsitems.title }}</h1>
-<p>{{ newsitems }}</p>
-<p>{{ newsitems.comment }}</p>
-<p>{{ newsitems.comment_set }}</p>
-<p>{{ newsitems.comment_set.user }}</p>
+
+<p>{{ newsitems.description }}</p>
+<p>Дата создания: {{ newsitems.created_at }}</p>
+<p>Дата изменения: {{ newsitems.edit_at }}</p>
+<br>
 <ul>
-    <li><p>{{ newsitems.description }}</p></li>
-    <li><p>Дата создания: {{ newsitems.created_at }}</p></li>
-    <li><p>Дата изменения: {{ newsitems.edit_at }}</p></li>
-    <br>
-    {% for comment in newsitems.comments %}
-        <p>!!!!!!!!!!!!!!!!</p>
-        <li><p>Автор комментария: {{ comment_set.user }}</p></li>
-        <li><p>Автор комментария: {{ comment.news_lunk.user }}</p></li>
-        <li><p>Автор комментария: {{ comment.user }}</p></li>
-        <p>Комментарий: {{ comment.comment }}</p>
+    {% for comment in  newsitems.news_link.all %}
+        <li><p>Комментарий: {{ comment.comment }}</p></li>
+        <p><i>Автор комментария: {{ comment.user }}</i></p>
     {% endfor %}
 </ul>
 
