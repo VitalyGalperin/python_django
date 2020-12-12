@@ -1,7 +1,6 @@
-
 from django.views.generic import View, ListView, DetailView, UpdateView, CreateView
 
-from .forms import EditNews
+from .forms import EditNews, AddComment
 from .models import NewsItem, Comment
 
 
@@ -31,6 +30,13 @@ class EditNewsView(UpdateView):
     form_class = EditNews
     success_url = '/'
 
+
+class AddNewsComment(CreateView):
+    model = Comment
+    template_name = 'app_news/add_comment.html'
+    form_class = AddComment
+    success_url = '/'
+
 # Удаление записей
 # NewsItem.objects.filter(title='').delete()
 
@@ -39,10 +45,3 @@ class EditNewsView(UpdateView):
 # news = NewsItem.objects.get(pk=25)
 # comment = news.news_link.all()
 # comment = news.news_set.all() # по умолчению, без related_name
-
-
-
-
-
-
-

@@ -17,6 +17,16 @@ class EditNews(forms.ModelForm):
         fields = '__all__'
 
 
+class AddComment(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ['comment', 'user']
+        widgets = {
+            'comment': forms.Textarea(),
+            'user': forms.TextInput(),
+        }
+
+
 # Пример формы с дополнительной валидацией из лекции
 class UserFieldsForm(forms.ModelForm):
     username = forms.CharField(max_length=25)

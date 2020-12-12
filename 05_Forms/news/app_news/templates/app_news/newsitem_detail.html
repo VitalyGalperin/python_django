@@ -13,12 +13,15 @@
 <p>Дата создания: {{ newsitems.created_at }}</p>
 <p>Дата изменения: {{ newsitems.edit_at }}</p>
 <br>
+
 <ul>
     {% for comment in  newsitems.news_link.all %}
         <li><p>Комментарий: {{ comment.comment }}</p></li>
         <p><i>Автор комментария: {{ comment.user }}</i></p>
     {% endfor %}
 </ul>
+
+<p><a href="/newsitems/add_comment">Добавить комментарий</a></p>
 
 </body>
 </html>
