@@ -2,26 +2,27 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>{{ object.title }}</title>
+    <title>{{ newsitem.title }}</title>
 </head>
 <body>
 <p><a href="/">Главная</a></p>
 
-<h1>{{ newsitems.title }}</h1>
+<h1>{{ newsitem.title }}</h1>
 
-<p>{{ newsitems.description }}</p>
-<p>Дата создания: {{ newsitems.created_at }}</p>
-<p>Дата изменения: {{ newsitems.edit_at }}</p>
+<p>{{ newsitem.description }}</p>
+<p>Дата создания: {{ newsitem.created_at }}</p>
+<p>Дата изменения: {{ newsitem.edit_at }}</p>
 <br>
 
 <ul>
-    {% for comment in  newsitems.news_link.all %}
+    {% for comment in  newsitem.news_link.all %}
         <li><p>Комментарий: {{ comment.comment }}</p></li>
         <p><i>Автор комментария: {{ comment.user }}</i></p>
     {% endfor %}
 </ul>
 
-<p><a href="/newsitems/add_comment">Добавить комментарий</a></p>
+{#<p><a href="/newsitems/add_comment">Добавить комментарий</a></p>#}
+<p><a href="{% url 'AddNewsComment' newsitem.pk %}">Добавить комментарий</a></p>
 
 </body>
 </html>
