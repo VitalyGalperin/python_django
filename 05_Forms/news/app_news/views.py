@@ -1,4 +1,6 @@
-from django.views.generic import View, ListView, DetailView, UpdateView, CreateView
+
+from django.shortcuts import redirect
+from django.views.generic import ListView, DetailView, UpdateView, CreateView
 
 from .forms import EditNews, AddComment
 from .models import NewsItem, Comment
@@ -36,12 +38,15 @@ class AddNewsComment(CreateView):
     model = Comment
     template_name = 'app_news/add_comment.html'
     form_class = AddComment
-    success_url = '/'
 
-    def get_context_data(self, **kwargs):  # Дополнение данных
-        context = super().get_context_data(**kwargs)
-        context['news_fk_id'] = Comment.objects.get(pk=self.kwargs['pk'])
-        return context
+    def form_valid(self, form):
+        save_comment = Comment(user=form.cleaned_data['user'],
+                               comment=form.cleaned_data['comment'],
+                               news_fk_id=self.kwargs['pk'])
+        save_comment.save()
+        last_slash = self.request.META.get('HTTP_REFERER').rfind('/')
+        return redirect(self.request.META.get('HTTP_REFERER')[:last_slash])
+
 
 # Удаление записей
 # NewsItem.objects.filter(title='').delete()
