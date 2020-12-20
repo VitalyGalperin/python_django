@@ -1,5 +1,5 @@
-
-from django.shortcuts import redirect
+from django.http import HttpResponseRedirect
+from django.urls import reverse
 from django.views.generic import ListView, DetailView, UpdateView, CreateView
 
 from .forms import EditNews, AddComment
@@ -44,13 +44,12 @@ class AddNewsComment(CreateView):
                                comment=form.cleaned_data['comment'],
                                news_fk_id=self.kwargs['pk'])
         save_comment.save()
-        last_slash = self.request.META.get('HTTP_REFERER').rfind('/')
-        return redirect(self.request.META.get('HTTP_REFERER')[:last_slash])
+        return HttpResponseRedirect(reverse('NewsDetailView', args=[self.kwargs['pk']]))
 
 
 # Удаление записей
 # NewsItem.objects.filter(title='').delete()
-
+# Comment.objects.all().delete()
 
 # обратная связь
 # news = NewsItem.objects.get(pk=25)
