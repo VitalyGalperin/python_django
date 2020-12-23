@@ -24,7 +24,7 @@ class NewsItemAdmin(admin.ModelAdmin):
 
 
 class CommentAdmin(admin.ModelAdmin):
-    list_display = ('user', 'comment')
+    list_display = ('user', 'short_comment')
     list_filter = ('user',)
     search_fields = ('user',)
     actions = ('deleted_by_admin',)
@@ -32,6 +32,10 @@ class CommentAdmin(admin.ModelAdmin):
     def deleted_by_admin(self, request, queryset):
         queryset.update(comment='Удалено администратором')
 
+    def short_comment(self, obj):
+        return obj.comment[:15]+'...'
+
+    short_comment.short_description = 'short_comment'
     deleted_by_admin.short_description = 'Перевести в статус "Удалено администратором"'
 
 
