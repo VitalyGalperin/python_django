@@ -13,10 +13,10 @@ class NewsItemAdmin(admin.ModelAdmin):
     inlines = (CommentInLine,)
     actions = ('mark_as_active', 'mark_as_inactive')
 
-    def mark_as_active(self, request,  queryset):
+    def mark_as_active(self, request, queryset):
         queryset.update(is_active=True)
 
-    def mark_as_inactive(self, request,  queryset):
+    def mark_as_inactive(self, request, queryset):
         queryset.update(is_active=False)
 
     mark_as_active.short_description = 'Перевести в статус "Активно"'
