@@ -33,7 +33,10 @@ class CommentAdmin(admin.ModelAdmin):
         queryset.update(comment='Удалено администратором')
 
     def short_comment(self, obj):
-        return obj.comment[:15]+'...'
+        if len(obj.comment) > 15:
+            return obj.comment[:15]+'...'
+        else:
+            return obj.comment
 
     short_comment.short_description = 'short_comment'
     deleted_by_admin.short_description = 'Перевести в статус "Удалено администратором"'
