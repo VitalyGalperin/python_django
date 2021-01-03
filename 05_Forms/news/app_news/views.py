@@ -39,11 +39,6 @@ class AddNewsComment(CreateView):
     model = Comment
     template_name = 'app_news/add_comment.html'
     form_class = AddComment
-    #
-    # def get_initial(self):
-    #     initial = CreateView.get_initial(self)
-    #     initial['user_name'] = self.request.user.username
-    #     return initial
 
     def form_valid(self, form):
         if self.request.user.is_authenticated:
