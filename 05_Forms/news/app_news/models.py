@@ -1,5 +1,6 @@
 from django.db import models
 from django.urls import reverse
+from django.contrib.auth.models import User
 
 
 class NewsItem(models.Model):
@@ -21,10 +22,11 @@ class NewsItem(models.Model):
 
 
 class Comment(models.Model):
-    user = models.CharField(max_length=30, verbose_name='Пользователь')
     comment = models.TextField(default='', null=True, verbose_name='Комментарий')
+    user_name = models.CharField(max_length=50, blank=True, null=True, verbose_name='Имя пользователя')
     news_fk = models.ForeignKey('NewsItem', default=None, null=True, on_delete=models.CASCADE,
                                 related_name='news_link')
+    user = models.ForeignKey(User, default=None, null=True, on_delete=models.CASCADE, related_name='user_link')
 
     def __str__(self):
         return self.comment

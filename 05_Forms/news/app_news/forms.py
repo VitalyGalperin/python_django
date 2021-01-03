@@ -20,11 +20,16 @@ class EditNews(forms.ModelForm):
 class AddComment(forms.ModelForm):
     class Meta:
         model = Comment
-        fields = ['comment', 'user']
+        fields = ['comment', 'user_name']
         widgets = {
-            'comment': forms.Textarea(),
-            'user': forms.TextInput(),
+            'comment': forms.Textarea(attrs={'label': 'Комментарий '}),
+            'user_name': forms.TextInput(attrs={'label': 'Имя пользователя '}),
         }
+
+
+class AuthForm(forms.Form):
+    username = forms.CharField()
+    password = forms.CharField(widget=forms.PasswordInput)
 
 
 # Пример формы с дополнительной валидацией из лекции

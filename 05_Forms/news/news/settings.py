@@ -125,3 +125,7 @@ STATIC_URL = '/static/'
 INTERNAL_IPS = [
     '127.0.0.1',
 ]
+
+LOGIN_REDIRECT_URL = '/'
+
+SESSION_COOKIE_AGE = 30 * 24 * 60 * 60
