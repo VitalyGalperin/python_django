@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="db" uuid="8d8450e7-ad7a-4bf5-b7f6-34344b442ab4">
+    <data-source source="LOCAL" name="db" uuid="50b9c48d-c04e-4b84-b200-02cdb426c698">
       <driver-ref>sqlite.xerial</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
-      <jdbc-url>jdbc:sqlite:D:\vit\pithon cours\python_django\05_Forms\news\db.sqlite3</jdbc-url>
+      <jdbc-url>jdbc:sqlite:D:\vit\pithon cours\python_django\08_RegistrationAndAuthorization\djregistration\db.sqlite3</jdbc-url>
       <libraries>
         <library>
           <url>file://$APPLICATION_CONFIG_DIR$/jdbc-drivers/Xerial SQLiteJDBC/3.31.1/sqlite-jdbc-3.31.1.jar</url>

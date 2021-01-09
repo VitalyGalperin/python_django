@@ -20,6 +20,7 @@ from .views import MainView
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('users/', include('app_users.urls')),
-    path('', MainView.as_view(), name='main'),
+    path('', include('app_news.urls')),
+    # path('news/', include('app_news.urls')),
 ]
 

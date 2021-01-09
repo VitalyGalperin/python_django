@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>User </title>
+</head>
+<body>
+<h2>Изменить пользователя</h2>
+<form method="post">
+    {% csrf_token %}
+    <p>Пользователь: {{ form.username }} </p>
+    <p>Имя: {{ form.first_name }} </p>
+    <p>Фамилия: {{ form.last_name }} </p>
+    <p>email: {{ form.email }} </p>
+{#    {{ form.as_p }}#}
+    <button type="submit">Сохранить</button>
+</form>
+<p><a href="/">Главная</a></p>
+</body>
+</html>
