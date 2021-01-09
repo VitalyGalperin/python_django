@@ -48,17 +48,6 @@ class AccountView(DetailView):
     def get(self, request, *args, **kwargs):
         return render(request, 'users/account.html')
 
-
-def edit_account_view(request):
-    if request.method == 'POST':
-        form = AccountForm(request.POST, instance=request.user)
-        if form.is_valid():
-            form.save()
-            return redirect('/')
-    else:
-        form = AccountForm(instance=request.user)
-    return render(request, 'users/edit_account.html', {'form': form})
-
 # _________  Not used. notes ____________
 #
 #

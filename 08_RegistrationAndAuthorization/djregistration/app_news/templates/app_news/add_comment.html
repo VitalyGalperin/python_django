@@ -12,12 +12,6 @@
     <form  method="post">
         {% csrf_token %}
         {{ form.as_p }}
-{#        <p>Комментарий: {{ form.comment }}</p>#}
-{##}
-{#        {% if not user.is_authenticated %}#}
-{#            <br>#}
-{#            <p>Имя пользователя: {{ form.user_name }}</p>#}
-{#        {% endif %}#}
 
         <p><button type="submit">Сохранить</button></p>
     </form>

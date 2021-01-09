@@ -31,7 +31,7 @@ class EditNewsView(UpdateView):
     model = NewsItem
     template_name = 'app_news/edit_news.html'
     form_class = EditNews
-    context_object_name = 'comment'
+    # context_object_name = 'comment'
     success_url = '/'
 
 
@@ -65,21 +65,3 @@ class AddNewsComment(CreateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         return context
-#
-#
-# class UserLoginView(LoginView):
-#     template_name = 'users/login.html'
-#
-#
-# class UserLogoutView(LogoutView):
-#     template_name = 'users/logout.html'
-
-
-# Удаление записей
-# NewsItem.objects.filter(title='').delete()
-# Comment.objects.all().delete()
-
-# обратная связь
-# news = NewsItem.objects.get(pk=25)
-# comment = news.news_link.all()
-# comment = news.news_set.all() # по умолчению, без related_name

@@ -8,7 +8,6 @@
 
 {% if request.user.is_authenticated %}
     <h3>Добро пожаловать, {{ request.user.username }}</h3>
-    <p><a href="{% url 'edit_account' %}">Изменить аккаунт</a></p>
     <p><a href="{% url 'account' %}">Просмотр аккаунта</a></p>
     <p><a href="{% url 'logout' %}">Выйти</a></p>
 {% else %}

@@ -31,4 +31,4 @@ class AccountForm(UserChangeForm):
 
     class Meta:
         model = User
-        fields = ('username', 'first_name', 'last_name', 'email', )
+        fields = ('username', 'first_name', 'last_name', 'email', 'phone', 'city', 'is_verified')

@@ -10,7 +10,13 @@
 <p>Фамилия: {{ user.last_name }} </p>
 <p>email: {{ user.email }} </p>
 <p>Город: {{ user.profile.city }} </p>
-<p>Дата рождения: {{ user.profile.date_of_birth }} </p>
+<p>email: {{ user.profile.phone }} </p>
+{% if user.profile.is_verified %}
+    <p>Верифицирован: Да
+{% else %}
+    <p>Верифицирован: Нет
+{% endif %}
+<p>Опубликовано новостей: {{ user.profile.news_numbers }} </p>
 <p><a href="/">Главная</a></p>
 </body>
 </html>
