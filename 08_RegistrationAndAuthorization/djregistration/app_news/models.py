@@ -9,7 +9,7 @@ class NewsItem(models.Model):
     description = models.TextField(default='', null=True, verbose_name='Содержание')
     created_at = models.DateTimeField(auto_now_add=True, db_index=True, verbose_name='Опубликована')
     edit_at = models.DateTimeField(auto_now=True, verbose_name='Изменена')
-    is_active = models.BooleanField(default=True, null=True, verbose_name='Активна')
+    is_active = models.BooleanField(default=False, null=True, verbose_name='Активна')
 
     def __str__(self):
         return self.title
@@ -20,6 +20,9 @@ class NewsItem(models.Model):
     class Meta:
         verbose_name = 'Новость'
         verbose_name_plural = 'Новости'
+        permissions = (
+            ('can_publish', 'Может публиковать'),
+        )
 
 
 class Comment(models.Model):
@@ -37,3 +40,15 @@ class Comment(models.Model):
         verbose_name_plural = 'Комментарии'
 
 
+class Teg(models.Model):
+
+    teg = models.CharField(max_length=15, blank=True, null=True, verbose_name='Тег')
+    news = models.ForeignKey('NewsItem', default=None, null=True, on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True, db_index=True, verbose_name='Опубликована')
+
+    def __str__(self):
+        return self.teg
+
+    class Meta:
+        verbose_name = 'Тег'
+        verbose_name_plural = 'Теги'
