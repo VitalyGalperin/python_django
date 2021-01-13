@@ -2,9 +2,8 @@ from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.views.generic import ListView, DetailView, UpdateView, CreateView
 
-from .forms import EditNews, AddComment, AuthForm
+from .forms import EditNews, AddComment
 from .models import NewsItem, Comment
-from django.contrib.auth.views import LoginView, LogoutView
 
 
 class NewsListView(ListView):

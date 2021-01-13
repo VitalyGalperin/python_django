@@ -12,3 +12,6 @@ class Profile(models.Model):
     class Meta:
         verbose_name = 'Дополнение пользователя'
         verbose_name_plural = 'Дополнения пользователя'
+        permissions = (
+            ('can_verified_users', 'Может верифицировать пользователей'),
+        )
