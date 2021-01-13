@@ -14,4 +14,7 @@ class Profile(models.Model):
         verbose_name_plural = 'Дополнения пользователя'
         permissions = (
             ('can_verified_users', 'Может верифицировать пользователей'),
+            ('can_publish', 'Может публиковать'),
+            ('can_view_unverified', 'Видеть неверифицированные новости'),
         )
+

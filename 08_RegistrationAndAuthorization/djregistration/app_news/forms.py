@@ -23,7 +23,7 @@ class AddComment(forms.ModelForm):
         fields = ['comment', 'user_name']
         widgets = {
             'comment': forms.Textarea(attrs={'label': 'Комментарий '}),
-            'user_name': forms.TextInput(attrs={'label': 'Имя пользователя '}),
+            'user_name': forms.TextInput(attrs={'label': 'Имя пользователя ', 'readonly': 'readonly'}),
         }
 
 

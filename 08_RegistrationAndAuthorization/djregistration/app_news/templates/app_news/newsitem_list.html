@@ -16,28 +16,34 @@
     <p><a href="{% url 'register' %}">Зарегистрироваться</a></p>
 {% endif %}
 
-<p><a href="{% url 'AddNewsView' %}">Добавить новость</a></p>
-
+{% if perms.user.can_publish %}
+    <p><a href="{% url 'AddNewsView' %}">Добавить новость</a></p>
+{% endif %}
 <h1>Новости</h1>
 
 {% if newsitems %}
     <ul>
         {% for newsitem in newsitems %}
-            {% if newsitem.is_active %}
-                <li>
-                    <h4><a href="{% url 'NewsDetailView' newsitem.pk %}">{{ newsitem.title }}</a></h4>
-                    <p><a href="{% url 'EditNewsView' newsitem.pk %}">Редактировать новость</a></p>                    <p>
-                        {{ newsitem.description }}
-                    </p>
-                    <p>
-                        Дата создания: {{ newsitem.created_at }}
-                    </p>
-                    <p>
-                        Дата изменения: {{ newsitem.edit_at }}
-                    </p>
+            <li>
+                <h4><a href="{% url 'NewsDetailView' newsitem.pk %}">{{ newsitem.title }}</a>
+                    {% if not newsitem.is_active %}
+                        НЕ ВЕРЕФИЦИРОВАНА!!!
+                    {% endif %}
+                </h4>
+                {% if perms.user.can_publish %}
+                    <p><a href="{% url 'EditNewsView' newsitem.pk %}">Редактировать новость</a></p>
+                {% endif %}
+                <p>
+                    {{ newsitem.description }}
+                </p>
+                <p>
+                    Дата создания: {{ newsitem.created_at }}
+                </p>
+                <p>
+                    Дата изменения: {{ newsitem.edit_at }}
+                </p>
 
-                </li>
-            {% endif %}
+            </li>
         {% endfor %}
     </ul>
 {% else %}

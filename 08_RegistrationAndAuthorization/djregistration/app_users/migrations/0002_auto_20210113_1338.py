@@ -2,8 +2,8 @@ from django.contrib.auth.models import User, Group, Permission
 from django.db import migrations
 
 GROUPS_PERMISSIONS = {'auth_users': [],
-                      'verified_users': [],
-                      'moderators': ['can_publish', 'can_verified_users']}
+                      'verified_users': ['add_newsitem', 'change_newsitem', 'delete_newsitem'],
+                      'moderators': ['can_publish', 'can_verified_users', 'can_view_unverified']}
 
 
 def create_groups_and_permissions(apps, schema_editor):

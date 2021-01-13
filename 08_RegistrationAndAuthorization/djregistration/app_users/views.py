@@ -1,12 +1,10 @@
 from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.decorators import permission_required
-from django.contrib.auth.forms import UserCreationForm
+
 from django.contrib.auth.models import User
-from django.core.exceptions import PermissionDenied
 from django.shortcuts import render, redirect
 from django.views.generic import DetailView
 
-from .forms import AuthForm, ExtendedRegisterForm, AccountForm
+from .forms import ExtendedRegisterForm
 from .models import Profile
 from django.contrib.auth.views import LoginView, LogoutView
 
@@ -49,7 +47,9 @@ class AccountView(DetailView):
         return render(request, 'users/account.html')
 
 # _________  Not used. notes ____________
-#
+# from django.contrib.auth.decorators import permission_required
+# from django.contrib.auth.forms import UserCreationForm
+# from django.core.exceptions import PermissionDenied
 #
 # @permission_required
 # def vacancy_list(request):

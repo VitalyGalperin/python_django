@@ -17,15 +17,13 @@
 <ul>
     {% for comment in  newsitem.news_link.all %}
         <li><p>Комментарий: {{ comment.comment }}</p></li>
-        <p><i>Автор комментария: {{ comment.user_name }}
-        {% if not comment.user %}
-                ( аноним )
+        {% if comment.user %}
+            <p><i>Автор комментария: {{ comment.user_name }}
         {% endif %}
         </i></p>
     {% endfor %}
 </ul>
 
-{#<p><a href="/newsitems/add_comment">Добавить комментарий</a></p>#}
 <p><a href="{% url 'AddNewsComment' newsitem.pk %}">Добавить комментарий</a></p>
 
 </body>

@@ -7,11 +7,14 @@
 <body>
     <p><a href="/">Главная</a></p>
 
-    <h1>{{ comment.title }}</h1>
-
+        {% if request.user.is_authenticated %}
+            <p><i>Автор комментария: {{ request.user.username }}</i></p>
+        {% else %}
+            <p><i>Автор комментария: аноним</i></p>
+        {% endif %}
     <form  method="post">
         {% csrf_token %}
-        {{ form.as_p }}
+        {{ form.comment }}
 
         <p><button type="submit">Сохранить</button></p>
     </form>

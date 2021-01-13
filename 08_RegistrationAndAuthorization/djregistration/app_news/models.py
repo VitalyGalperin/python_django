@@ -20,9 +20,6 @@ class NewsItem(models.Model):
     class Meta:
         verbose_name = 'Новость'
         verbose_name_plural = 'Новости'
-        permissions = (
-            ('can_publish', 'Может публиковать'),
-        )
 
 
 class Comment(models.Model):
