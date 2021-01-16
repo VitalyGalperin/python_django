@@ -16,7 +16,7 @@
     <p><a href="{% url 'register' %}">Зарегистрироваться</a></p>
 {% endif %}
 
-{% if perms.user.can_publish %}
+{% if perms.app_news.add_newsitem %}
     <p><a href="{% url 'AddNewsView' %}">Добавить новость</a></p>
 {% endif %}
 <h1>Новости</h1>
@@ -30,7 +30,7 @@
                         НЕ ВЕРЕФИЦИРОВАНА!!!
                     {% endif %}
                 </h4>
-                {% if perms.user.can_publish %}
+                {% if perms.app_news.change_newsitem %}
                     <p><a href="{% url 'EditNewsView' newsitem.pk %}">Редактировать новость</a></p>
                 {% endif %}
                 <p>

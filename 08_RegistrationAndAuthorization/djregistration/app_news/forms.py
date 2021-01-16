@@ -5,19 +5,13 @@ from django.core.exceptions import ValidationError
 from .models import NewsItem, Comment
 
 
-class AddNews(forms.ModelForm):
-    class Meta:
-        model = NewsItem
-        fields = '__all__'
-
-
 class EditNews(forms.ModelForm):
     class Meta:
         model = NewsItem
-        fields = '__all__'
+        fields = ['title', 'description', 'is_active']
 
 
-class AddComment(forms.ModelForm):
+class EditComment(forms.ModelForm):
     class Meta:
         model = Comment
         fields = ['comment', 'user_name']
