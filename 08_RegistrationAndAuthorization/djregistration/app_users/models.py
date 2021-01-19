@@ -9,6 +9,9 @@ class Profile(models.Model):
     is_verified = models.BooleanField(default=False, verbose_name='Верифицирован')
     news_numbers = models.IntegerField(default=0, verbose_name='Опубликовано новостей')
 
+    def __str__(self):
+        return self.user
+
     class Meta:
         verbose_name = 'Дополнение пользователя'
         verbose_name_plural = 'Дополнения пользователя'

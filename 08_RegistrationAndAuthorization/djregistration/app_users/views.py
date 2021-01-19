@@ -2,7 +2,7 @@ from django.contrib.auth import authenticate, login, logout
 
 from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
-from django.views.generic import DetailView
+from django.views.generic import DetailView, FormView
 
 from .forms import ExtendedRegisterForm
 from .models import Profile
@@ -18,26 +18,25 @@ class Logout2View(LogoutView):
     next_page = '/'
 
 
-def register_view(request):
-    if request.method == 'POST':
-        form = ExtendedRegisterForm(request.POST)
-        if form.is_valid():
-            user = form.save()
-            city = form.cleaned_data['city']
-            phone = form.cleaned_data['phone']
-            Profile.objects.create(
-                user=user,
-                city=city,
-                phone=phone,
-            )
-            username = form.cleaned_data['username']
-            raw_password = form.cleaned_data['password1']
-            user = authenticate(username=username, password=raw_password)
-            login(request, user)
-            return redirect('/')
-    else:
-        form = ExtendedRegisterForm()
-    return render(request, 'users/register.html', {'form': form})
+class Registration2View(FormView):
+    template_name = 'users/register.html'
+    success_url = '/'
+    form_class = ExtendedRegisterForm
+
+    def form_valid(self, form):
+        user = form.save()
+        city = form.cleaned_data['city']
+        phone = form.cleaned_data['phone']
+        Profile.objects.create(
+            user=user,
+            city=city,
+            phone=phone,
+        )
+        username = form.cleaned_data['username']
+        raw_password = form.cleaned_data['password1']
+        user = authenticate(username=username, password=raw_password)
+        login(self.request, user)
+        return super(Registration2View, self).form_valid(form)
 
 
 class AccountView(DetailView):
