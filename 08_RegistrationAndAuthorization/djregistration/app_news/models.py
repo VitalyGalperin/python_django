@@ -9,6 +9,7 @@ class NewsItem(models.Model):
     created_at = models.DateTimeField(auto_now_add=True, db_index=True, verbose_name='Опубликована')
     edit_at = models.DateTimeField(auto_now=True, verbose_name='Изменена')
     is_active = models.BooleanField(default=False, null=True, blank=True, verbose_name='Активна')
+    creator = models.ForeignKey(User, default=None, on_delete=models.CASCADE, related_name='creator_link')
 
     def __str__(self):
         return self.title
