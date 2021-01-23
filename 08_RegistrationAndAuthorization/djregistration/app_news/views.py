@@ -14,6 +14,7 @@ class NewsListView(ListView):
 
     def get_queryset(self):
         # Permission.objects.filter(id__gte=41).delete()
+        # NewsItem.objects.all().delete()
         if not self.request.user.has_perm('app_users.can_view_unverified'):
             return NewsItem.objects.filter(is_active=True).order_by('-edit_at')
         else:
@@ -36,6 +37,17 @@ class AddNewsView(CreateView):
         if not request.user.has_perm('app_news.add_newsitem'):
             raise PermissionDenied()
         return super().get(request, *args, **kwargs)
+
+    def form_valid(self, form):
+        save_user_id = self.request.user.id
+        save_newsitem = NewsItem(
+            title=form.cleaned_data['title'],
+            description=form.cleaned_data['description'],
+            is_active=form.cleaned_data['is_active'],
+            creator_id=save_user_id,
+                               )
+        save_newsitem.save()
+        return HttpResponseRedirect('/')
 
 
 class EditNewsView(UpdateView):

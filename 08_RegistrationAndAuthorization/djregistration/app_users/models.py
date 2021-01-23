@@ -7,7 +7,7 @@ class Profile(models.Model):
     city = models.CharField(max_length=30, blank=True, verbose_name='Город')
     phone = models.CharField(max_length=13, blank=True, verbose_name='Телефон')
     is_verified = models.BooleanField(default=False, verbose_name='Верифицирован')
-    news_numbers = models.IntegerField(default=0, verbose_name='Опубликовано новостей')
+    news_number = models.IntegerField(default=0, verbose_name='Опубликовано новостей')
 
     def __str__(self):
         return self.user
