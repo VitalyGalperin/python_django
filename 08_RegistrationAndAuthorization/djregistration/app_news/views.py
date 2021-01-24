@@ -3,8 +3,8 @@ from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.views.generic import ListView, DetailView, UpdateView, CreateView
 
-from .forms import EditNews, EditComment
-from .models import NewsItem, Comment
+from .forms import *
+from .models import *
 
 
 class NewsListView(ListView):
@@ -15,10 +15,11 @@ class NewsListView(ListView):
     def get_queryset(self):
         # Permission.objects.filter(id__gte=41).delete()
         # NewsItem.objects.all().delete()
+        query_set = super().get_queryset()
         if not self.request.user.has_perm('app_users.can_view_unverified'):
-            return NewsItem.objects.filter(is_active=True).order_by('-edit_at')
+            return query_set.filter(is_active=True).order_by('-edit_at').prefetch_related('tag')
         else:
-            return NewsItem.objects.order_by('-edit_at')
+            return query_set.order_by('-edit_at').prefetch_related('tag')
 
 
 class NewsDetailView(DetailView):
@@ -90,5 +91,17 @@ class AddNewsComment(CreateView):
         return HttpResponseRedirect(reverse('NewsDetailView', args=[self.kwargs['pk']]))
 
 
+class AddTagView(CreateView):
+    model = Tag
+    template_name = 'app_news/add_tag.html'
+    form_class = EditTag
 
+    def get(self, request, *args, **kwargs):
+        if not request.user.has_perm('app_news.add_newsitem'):
+            raise PermissionDenied()
+        return super().get(request, *args, **kwargs)
 
+    def form_valid(self, form):
+        save_tag = Tag(tag=form.cleaned_data['tag'])
+        save_tag.save()
+        return HttpResponseRedirect(reverse('EditNewsView', args=[self.kwargs['pk']]))

@@ -2,13 +2,13 @@ from django import forms
 import datetime
 from django.core.exceptions import ValidationError
 
-from .models import NewsItem, Comment
+from .models import *
 
 
 class EditNews(forms.ModelForm):
     class Meta:
         model = NewsItem
-        fields = ['title', 'description', 'is_active']
+        fields = ['title', 'description', 'tag', 'is_active']
 
 
 class EditComment(forms.ModelForm):
@@ -18,6 +18,15 @@ class EditComment(forms.ModelForm):
         widgets = {
             'comment': forms.Textarea(attrs={'label': 'Комментарий '}),
             'user_name': forms.TextInput(attrs={'label': 'Имя пользователя ', 'readonly': 'readonly'}),
+        }
+
+
+class EditTag(forms.ModelForm):
+    class Meta:
+        model = Tag
+        fields = ['tag']
+        widgets = {
+            'tag': forms.TextInput(attrs={'label': 'Тег '}),
         }
 
 

@@ -30,6 +30,13 @@
                         НЕ ВЕРЕФИЦИРОВАНА!!!
                     {% endif %}
                 </h4>
+                {% if newsitem.tag.exists %}
+                    Теги:
+                    {% for tag in newsitem.tag.all %}
+                        <a href="{{ tag.get_absolute_url }}">{{ tag.tag }}</a>
+                    {% endfor %}
+                <br>
+                {% endif %}
                 {% if perms.app_news.change_newsitem %}
                     <p><a href="{% url 'EditNewsView' newsitem.pk %}">Редактировать новость</a></p>
                 {% endif %}

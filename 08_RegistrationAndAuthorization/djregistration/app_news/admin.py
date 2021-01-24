@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import NewsItem, Comment
+from .models import NewsItem, Comment, Tag
 
 
 class CommentInLine(admin.TabularInline):
@@ -34,7 +34,7 @@ class CommentAdmin(admin.ModelAdmin):
 
     def short_comment(self, obj):
         if len(obj.comment) > 15:
-            return obj.comment[:15]+'...'
+            return obj.comment[:15] + '...'
         else:
             return obj.comment
 
@@ -44,4 +44,4 @@ class CommentAdmin(admin.ModelAdmin):
 
 admin.site.register(NewsItem, NewsItemAdmin)
 admin.site.register(Comment, CommentAdmin)
-
+admin.site.register(Tag)
