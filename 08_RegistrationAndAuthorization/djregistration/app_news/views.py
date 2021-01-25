@@ -1,6 +1,5 @@
 from django.core.exceptions import PermissionDenied
 from django.http import HttpResponseRedirect
-from django.urls import reverse
 from django.views.generic import ListView, DetailView, UpdateView, CreateView
 
 from .forms import *
@@ -13,13 +12,23 @@ class NewsListView(ListView):
     context_object_name = 'newsitems'
 
     def get_queryset(self):
-        # Permission.objects.filter(id__gte=41).delete()
-        # NewsItem.objects.all().delete()
         query_set = super().get_queryset()
         if not self.request.user.has_perm('app_users.can_view_unverified'):
-            return query_set.filter(is_active=True).order_by('-edit_at').prefetch_related('tag')
+            query_set = query_set.filter(is_active=True).order_by('-edit_at').prefetch_related('tag')
         else:
-            return query_set.order_by('-edit_at').prefetch_related('tag')
+            query_set = query_set.order_by('-edit_at').prefetch_related('tag')
+        if self.request.GET.get('tag_search'):
+            query_set = query_set.filter(tag__tag__icontains=self.request.GET.get('tag_search'))
+        if self.request.GET.get('date_search'):
+            get_date = self.request.GET.get('date_search')
+            a = datetime.date(year=int(get_date[6:]), month=int(get_date[3:5]), day=int(get_date[:2]))
+            query_set = query_set.filter(created_at__contains=a)
+        return query_set
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['search'] = f"tag={self.request.GET.get('s')}&"
+        return context
 
 
 class NewsDetailView(DetailView):
@@ -105,3 +114,4 @@ class AddTagView(CreateView):
         save_tag = Tag(tag=form.cleaned_data['tag'])
         save_tag.save()
         return HttpResponseRedirect(reverse('EditNewsView', args=[self.kwargs['pk']]))
+

@@ -10,8 +10,12 @@
         {% csrf_token %}
         <p>Заголовок: {{ form.title }}</p>
         <p>Содержание: {{ form.description }}</p>
-        <p>Теги: {{ form.tag }}</p>
-        <p><a href="{% url 'AddTagView' newsitem.pk %}">Добавить Тег</a></p>
+
+        {% if newsitem.pk %}
+            <p>Теги: {{ form.tag }}</p>
+            <p><a href="{% url 'AddTagView' newsitem.pk %}">Добавить Тег</a></p>
+        {% endif %}
+
         {% if perms.app_users.can_publish %}
             <p>Опубликована: {{ form.is_active }}</p>
         {% endif %}

@@ -15,6 +15,9 @@ class Tag(models.Model):
         verbose_name = 'Тег'
         verbose_name_plural = 'Теги'
 
+    def get_absolute_url(self):
+        return reverse('/', kwargs={'pk': self.pk})
+
 
 class NewsItem(models.Model):
     title = models.CharField(max_length=150, default='', db_index=True, verbose_name='Название')
@@ -27,9 +30,9 @@ class NewsItem(models.Model):
 
     def __str__(self):
         return self.title
-
-    def get_absolute_url(self):
-        return reverse('/', kwargs={'pk': self.pk})
+    #
+    # def get_absolute_url(self):
+    #     return reverse('/', kwargs={'pk': self.pk})
 
     class Meta:
         verbose_name = 'Новость'

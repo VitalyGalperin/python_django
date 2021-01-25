@@ -23,3 +23,4 @@ class Migration(migrations.Migration):
                   ]
 
 # Permission.objects.filter(id__gte=41).delete()
+# NewsItem.objects.all().delete()

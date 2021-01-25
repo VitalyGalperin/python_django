@@ -19,6 +19,17 @@
 {% if perms.app_news.add_newsitem %}
     <p><a href="{% url 'AddNewsView' %}">Добавить новость</a></p>
 {% endif %}
+
+<form action="{% url 'NewsListView' %}" method="get">
+    <label for="tag_search">Поиск по тегу: </label>
+    <input type="text" name="tag_search" id="tag_search" placeholder="Тег">
+
+    <label for="date_search">Поиск по дате создания: </label>
+    <input type="text" name="date_search" id="date_search" placeholder="DD-MM-YYYY">
+
+    <input type="submit" value="Поиск">
+</form>
+
 <h1>Новости</h1>
 
 {% if newsitems %}
@@ -33,7 +44,8 @@
                 {% if newsitem.tag.exists %}
                     Теги:
                     {% for tag in newsitem.tag.all %}
-                        <a href="{{ tag.get_absolute_url }}">{{ tag.tag }}</a>
+                        {{ tag.tag }}
+{#                        <a href="{{ tag.get_absolute_url }}">{{ tag.tag }}</a>#}
                     {% endfor %}
                 <br>
                 {% endif %}
