@@ -7,7 +7,7 @@
 <body>
     <p><a href="/">Главная</a></p>
 
-        {% if perms.app_users.can_publish %}
+        {% if perms.app_news.add_newsitem %}
             <form  method="post">
             {% csrf_token %}
             {{ form.tag }}

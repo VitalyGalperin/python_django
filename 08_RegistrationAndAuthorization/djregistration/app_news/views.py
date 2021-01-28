@@ -21,8 +21,8 @@ class NewsListView(ListView):
             query_set = query_set.filter(tag__tag__icontains=self.request.GET.get('tag_search'))
         if self.request.GET.get('date_search'):
             get_date = self.request.GET.get('date_search')
-            a = datetime.date(year=int(get_date[6:]), month=int(get_date[3:5]), day=int(get_date[:2]))
-            query_set = query_set.filter(created_at__contains=a)
+            formatted_date = datetime.date(year=int(get_date[6:]), month=int(get_date[3:5]), day=int(get_date[:2]))
+            query_set = query_set.filter(created_at__date=formatted_date)
         return query_set
 
     def get_context_data(self, *, object_list=None, **kwargs):
@@ -114,4 +114,9 @@ class AddTagView(CreateView):
         save_tag = Tag(tag=form.cleaned_data['tag'])
         save_tag.save()
         return HttpResponseRedirect(reverse('EditNewsView', args=[self.kwargs['pk']]))
+
+    # def get_context_data(self, *, object_list=None, **kwargs):
+    #     context = super().get_context_data(**kwargs)
+    #     context['tag'] = '111111'
+    #     return context
 

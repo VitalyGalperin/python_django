@@ -12,9 +12,5 @@ urlpatterns = [
     path('edit_tag/<int:pk>/', views.AddTagView.as_view(), name='AddTagView'),
 ]
 
-if settings.DEBUG:
-    import debug_toolbar
-    urlpatterns += path('__debug__/', include(debug_toolbar.urls)),
-
 
 

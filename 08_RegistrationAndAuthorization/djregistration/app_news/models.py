@@ -24,8 +24,8 @@ class NewsItem(models.Model):
     description = models.TextField(default='', null=True, verbose_name='Содержание')
     created_at = models.DateTimeField(auto_now_add=True, db_index=True, verbose_name='Опубликована')
     edit_at = models.DateTimeField(auto_now=True, verbose_name='Изменена')
-    is_active = models.BooleanField(default=False, null=True, blank=True, verbose_name='Активна')
-    tag = models.ManyToManyField(Tag, null=True, blank=True, verbose_name='Теги')
+    is_active = models.BooleanField(default=False, verbose_name='Активна')
+    tag = models.ManyToManyField(Tag, blank=True, verbose_name='Теги')
     creator = models.ForeignKey(User, default=None, on_delete=models.CASCADE, related_name='creator_link')
 
     def __str__(self):
