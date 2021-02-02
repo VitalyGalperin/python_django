@@ -6,9 +6,20 @@ from .models import *
 
 
 class EditNews(forms.ModelForm):
+
+    tags_string = forms.CharField(max_length=50, required=False)
+
     class Meta:
         model = NewsItem
-        fields = ['title', 'description', 'tag', 'is_active']
+        fields = ['title', 'description', 'is_active', 'tag']
+        widgets = {
+            'tags_string': forms.Textarea(attrs={'label': 'Ведите ТЕГИ через пробел: '}),
+        }
+
+        # tags_string = forms.ModelMultipleChoiceField(queryset=Tag.objects.all())
+        # widgets = {
+        #     'tags_string': forms.CheckboxSelectMultiple(attrs={'label': 'Ведите ТЕГИ через пробел: '}),
+        # }
 
 
 class EditComment(forms.ModelForm):
