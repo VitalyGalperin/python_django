@@ -45,7 +45,6 @@
                     Теги:
                     {% for tag in newsitem.tag.all %}
                         {{ tag.tag }}
-{#                        <a href="{{ tag.get_absolute_url }}">{{ tag.tag }}</a>#}
                     {% endfor %}
                 <br>
                 {% endif %}

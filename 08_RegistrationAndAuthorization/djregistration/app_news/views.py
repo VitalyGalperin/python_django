@@ -1,6 +1,7 @@
 from django.core.exceptions import PermissionDenied
 from django.http import HttpResponseRedirect
 from django.views.generic import ListView, DetailView, UpdateView, CreateView
+from django.contrib.auth.mixins import PermissionRequiredMixin
 
 from .forms import *
 from .models import *
@@ -37,16 +38,12 @@ class NewsDetailView(DetailView):
     context_object_name = 'newsitem'
 
 
-class AddNewsView(CreateView):
+class AddNewsView(PermissionRequiredMixin, CreateView):
     model = NewsItem
     template_name = 'app_news/edit_news.html'
     form_class = EditNews
     success_url = '/'
-
-    def get(self, request, *args, **kwargs):
-        if not request.user.has_perm('app_news.add_newsitem'):
-            raise PermissionDenied()
-        return super().get(request, *args, **kwargs)
+    permission_required = 'app_news.add_newsitem'
 
     def form_valid(self, form):
         save_user_id = self.request.user.id
@@ -65,16 +62,12 @@ class AddNewsView(CreateView):
         return HttpResponseRedirect('/')
 
 
-class EditNewsView(UpdateView):
+class EditNewsView(PermissionRequiredMixin, UpdateView):
     model = NewsItem
     template_name = 'app_news/edit_news.html'
     form_class = EditNews
     success_url = '/'
-
-    def get(self, request, *args, **kwargs):
-        if not request.user.has_perm('app_news.change_newsitem'):
-            raise PermissionDenied()
-        return super().get(request, *args, **kwargs)
+    permission_required = 'app_news.change_newsitem'
 
     def get_form_class(self):
         if not self.request.user.has_perm('app_users.can_publish'):
