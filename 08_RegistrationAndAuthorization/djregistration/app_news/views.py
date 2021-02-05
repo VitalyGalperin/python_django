@@ -1,5 +1,6 @@
 from django.core.exceptions import PermissionDenied
 from django.http import HttpResponseRedirect
+from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, UpdateView, CreateView
 from django.contrib.auth.mixins import PermissionRequiredMixin
 
@@ -42,7 +43,7 @@ class AddNewsView(PermissionRequiredMixin, CreateView):
     model = NewsItem
     template_name = 'app_news/edit_news.html'
     form_class = EditNews
-    success_url = '/'
+    success_url = reverse_lazy('NewsListView')
     permission_required = 'app_news.add_newsitem'
 
     def form_valid(self, form):
@@ -66,15 +67,17 @@ class EditNewsView(PermissionRequiredMixin, UpdateView):
     model = NewsItem
     template_name = 'app_news/edit_news.html'
     form_class = EditNews
-    success_url = '/'
+    success_url = reverse_lazy('NewsListView')
     permission_required = 'app_news.change_newsitem'
 
-    def get_form_class(self):
+    def get_form(self, form_class=None):
+        if form_class is None:
+            form_class = self.get_form_class()
         if not self.request.user.has_perm('app_users.can_publish'):
             self.fields = ['title', 'description', 'tags_string', 'tag']
         else:
             self.fields = ['title', 'description', 'is_active', 'tags_string', 'tag']
-        return self.form_class
+        return form_class(**self.get_form_kwargs())
 
     def form_valid(self, form):
         save_newsitem = form.save()
