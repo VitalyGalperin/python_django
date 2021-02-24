@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Новости</title>
+</head>
+<body>
+
+{% if request.user.is_authenticated %}
+    <h3>Добро пожаловать, {{ request.user.username }}</h3>
+    <p><a href="{% url 'logout' %}">Выйти</a></p>
+{% else %}
+    <h3>Вы не авторизованы</h3>
+    <p><a href="{% url 'login' %}">Войти</a></p>
+    <p><a href="{% url 'register' %}">Зарегистрироваться</a></p>
+{% endif %}
+
+<p><a href="{% url 'add_tasks' %}">Примеры и дополнительные задания</a></p>
+
+<br>
+
+{#{% if perms.app_blog.add_blog %}#}
+{#    <p><a href="{% url 'AddBlogView' %}">Добавить запись</a></p>#}
+{#{% endif %}#}
+
+<p><a href="{% url 'AddBlogView' %}">Добавить запись</a></p>
+
+
+{% if blog %}
+    <ul>
+    {% for blogitem in blog %}
+        <li>
+            <h4><a href="{% url 'BlogDetailView' blogitem.pk %}">{{ blogitem.title }}</a></h4>
+            {% if perms.app_blog.change_blog %}
+                <p><a href="{% url 'EditBlogView' blogitem.pk %}">Редактировать запись</a></p>
+            {% endif %}
+            <p>
+                {{ blogitem.description }}
+            </p>
+        </li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>Записей нет</p>
+{% endif %}
+
+</body>
+</html>

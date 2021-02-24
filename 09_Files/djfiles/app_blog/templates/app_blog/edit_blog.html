@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Статья блога</title>
+</head>
+<body>
+    <p><a href="/">Главная</a></p>
+    <form  method="post">
+        {% csrf_token %}
+        <p>Заголовок {{ form.title }}</p>
+        <p>Запись {{ form.description }}</p>
+        <p>Иллюстации {{ form.images }}</p>
+        <p><button type="submit">Сохранить</button></p>
+    </form>
+
+    <h1>{{ message }}</h1>
+</body>
+</html>

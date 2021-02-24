@@ -1,6 +1,3 @@
-from _csv import reader
-from decimal import Decimal
-
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from .forms import *
@@ -8,7 +5,7 @@ from .models import *
 from .additional_tasks import *
 
 
-def index(request):
+def add_tasks(request):
     return render(request, 'extra/index.html')
 
 
@@ -21,9 +18,9 @@ def upload_file(request):
             if file.content_type == 'text/plain':
                 text_file = upload_file_form.cleaned_data['file'].read()
                 if check_stop_words(text_file):
-                    content += ' Файл не прошел проверку'
-                else:
                     content += 'Все хорошо!'
+                else:
+                    content += ' Файл не прошел проверку'
             return HttpResponse(content=content, status=200)
     else:
         upload_file_form = UploadFileForm()
@@ -60,12 +57,11 @@ def upload_price(request):
     if request.method == 'POST' and request.FILES['file']:
         upload_file_form = UploadPriceForm(request.POST, request.FILES)
         if upload_file_form.is_valid():
+            file = request.FILES['file']
             price_file = upload_file_form.cleaned_data['file'].read()
-            price_str = price_file.decode('utf-8').split('\r\n')
-            csv_reader = reader(price_str, delimiter=';', quotechar='"')
-            for row in csv_reader:
-                if row:
-                    Item.objects.filter(code=row[0]).update(price=Decimal(row[1]))
+            if file.content_type == 'application/vnd.ms-excel' or file.content_type == 'text/plain':
+                price_parsing(file, price_file)
+                file_write(file, price_file)
             return HttpResponse(content='Success', status=200)
     else:
         upload_file_form = UploadFileForm()
