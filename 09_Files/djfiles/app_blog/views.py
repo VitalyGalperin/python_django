@@ -22,7 +22,7 @@ class BlogDetailView(DetailView):
 # class AddBlogView(PermissionRequiredMixin, CreateView):
 class AddBlogView(CreateView):
     model = Blog
-    form_class = EditBlogForm()
+    form_class = EditBlogForm
     template_name = 'app_blog/edit_blog.html'
     success_url = reverse_lazy('BlogListView')
     # permission_required = 'app_blog.add_blog'
