@@ -12,22 +12,9 @@
 <p>{{ blog.image }}</p>
 
 {% for image in  blog.image_link.all %}
-    <img src="{{ image.image.url }}" >
-    <img src="{{ image.image }}" >
+    <img src="{{ image.image.url }}" height="250" >
 {% endfor %}
 
-
-{#{% for blogitem in blog %}#}
-{#    <li>#}
-{#        <h4><a href="{% url 'BlogDetailView' blogitem.pk %}">{{ blogitem.title }}</a></h4>#}
-{#        {% if perms.app_blog.change_blog %}#}
-{#            <p><a href="{% url 'EditBlogView' blogitem.pk %}">Редактировать запись</a></p>#}
-{#        {% endif %}#}
-{#        <p>#}
-{#            {{ blogitem.description }}#}
-{#        </p>#}
-{#    </li>#}
-{#{% endfor %}#}
 
 </body>
 </html>

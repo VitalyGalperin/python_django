@@ -10,7 +10,13 @@
         {% csrf_token %}
         <p>Заголовок {{ form.title }}</p>
         <p>Запись {{ form.description }}</p>
-        <p>Иллюстации {{ form.images }}</p>
+        <p>Иллюстации:</p>
+        {% for image in  blog.image_link.all %}
+            <img src="{{ image.image.url }}" height="250" >
+        {% endfor %}
+
+        {{ image_form.as_p }}
+
         <p><button type="submit">Сохранить</button></p>
     </form>
 

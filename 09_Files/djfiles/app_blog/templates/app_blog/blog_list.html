@@ -19,11 +19,9 @@
 
 <br>
 
-{#{% if perms.app_blog.add_blog %}#}
-{#    <p><a href="{% url 'AddBlogView' %}">Добавить запись</a></p>#}
-{#{% endif %}#}
-
-<p><a href="{% url 'AddBlogView' %}">Добавить запись</a></p>
+{% if perms.app_blog.add_blog %}
+    <p><a href="{% url 'AddBlogView' %}">Добавить запись</a></p>
+{% endif %}
 
 
 {% if blog %}
@@ -36,6 +34,10 @@
             {% endif %}
             <p>
                 {{ blogitem.description }}
+                <br>
+                {% for image in  blogitem.image_link.all %}
+                    <img src="{{ image.image.url }}" height="150" >
+                {% endfor %}
             </p>
         </li>
     {% endfor %}
