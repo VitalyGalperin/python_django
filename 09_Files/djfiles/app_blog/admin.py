@@ -4,6 +4,7 @@ from .models import *
 
 class BlogAdmin(admin.ModelAdmin):
     model = Blog
+    list_display = ('title', 'created_at', 'user')
 
 
 class ImagesAdmin(admin.ModelAdmin):

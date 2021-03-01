@@ -1,20 +1,10 @@
-automium==0.2.6
-automium-web==0.1.1
 click==7.1.2
 Django==2.2
 django-debug-toolbar==2.2
-Flask==1.1.2
-itsdangerous==1.1.0
-Jinja2==2.11.2
-legacy==0.1.6
-MarkupSafe==1.1.1
-mysql==0.0.2
-mysql-connector-python==8.0.22
 mysqlclient==2.0.1
-protobuf==3.13.0
+Pillow==8.1.0
 python-decouple==3.3
 pytz==2020.1
-six==1.15.0
 sqlparse==0.4.1
-Werkzeug==1.0.1
+
 

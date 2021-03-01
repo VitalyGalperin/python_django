@@ -8,6 +8,7 @@
 
 {% if request.user.is_authenticated %}
     <h3>Добро пожаловать, {{ request.user.username }}</h3>
+    <p><a href="{% url 'account' %}">Изменить аккаунт</a></p>
     <p><a href="{% url 'logout' %}">Выйти</a></p>
 {% else %}
     <h3>Вы не авторизованы</h3>
@@ -28,17 +29,15 @@
     <ul>
     {% for blogitem in blog %}
         <li>
-            <h4><a href="{% url 'BlogDetailView' blogitem.pk %}">{{ blogitem.title }}</a></h4>
+            <h3><a href="{% url 'BlogDetailView' blogitem.pk %}">{{ blogitem.title }}</a></h3>
             {% if perms.app_blog.change_blog %}
-                <p><a href="{% url 'EditBlogView' blogitem.pk %}">Редактировать запись</a></p>
+                <a href="{% url 'EditBlogView' blogitem.pk %}">Редактировать запись</a>
             {% endif %}
-            <p>
-                {{ blogitem.description }}
-                <br>
+            <p>{{ blogitem.description|truncatechars:100 }}</p>
                 {% for image in  blogitem.image_link.all %}
                     <img src="{{ image.image.url }}" height="150" >
                 {% endfor %}
-            </p>
+            <p>Дата создания: {{ blogitem.created_at }}</p>
         </li>
     {% endfor %}
     </ul>

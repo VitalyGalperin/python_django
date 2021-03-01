@@ -6,6 +6,7 @@ from django.urls import reverse
 class Blog(models.Model):
     title = models.CharField(max_length=150, default='', verbose_name='Название')
     description = models.TextField(default='', null=True, verbose_name='Запись')
+    created_at = models.DateTimeField(auto_now_add=True, db_index=True, verbose_name='Опубликована')
     user = models.ForeignKey(User, default=None, null=True, blank=True, on_delete=models.CASCADE,
                              related_name='creator_link')
 
@@ -21,7 +22,7 @@ class Blog(models.Model):
 
 
 class Images(models.Model):
-    image = models.FileField(upload_to='images/%Y/%m/%d', blank=True, verbose_name='Иллюстрация')
+    image = models.ImageField(upload_to='images/%Y/%m/%d', blank=True, verbose_name='Иллюстрация')
     blog = models.ForeignKey(Blog, default=None, null=True, blank=True, on_delete=models.CASCADE,
                              related_name='image_link')
 
