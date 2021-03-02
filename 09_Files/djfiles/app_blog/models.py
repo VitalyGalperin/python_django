@@ -22,7 +22,7 @@ class Blog(models.Model):
 
 
 class Images(models.Model):
-    image = models.ImageField(upload_to='images/%Y/%m/%d', blank=True, verbose_name='Иллюстрация')
+    image = models.ImageField(upload_to='images/%Y/%m/%d/', blank=True, verbose_name='Иллюстрация')
     blog = models.ForeignKey(Blog, default=None, null=True, blank=True, on_delete=models.CASCADE,
                              related_name='image_link')
 

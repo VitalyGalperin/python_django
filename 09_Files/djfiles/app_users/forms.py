@@ -7,7 +7,7 @@ class AvatarRegisterForm(UserCreationForm):
     first_name = forms.CharField(max_length=30, required=False, label='Имя')
     last_name = forms.CharField(max_length=30, required=False, label='Фамилия')
     username = forms.CharField(max_length=30, required=False, label='Пользователь')
-    avatar = forms.FileField()
+    avatar = forms.ImageField(label='Иллюстации ', required=False,)
 
     class Meta:
         model = User
@@ -18,7 +18,7 @@ class AccountForm(UserChangeForm):
     first_name = forms.CharField(max_length=30, required=False, label='Имя')
     last_name = forms.CharField(max_length=30, required=False, label='Фамилия')
     username = forms.CharField(max_length=30, required=False, label='Пользователь')
-    avatar = forms.FileField()
+    avatar = forms.ImageField(label='Иллюстации ', required=False,)
 
     class Meta:
         model = User

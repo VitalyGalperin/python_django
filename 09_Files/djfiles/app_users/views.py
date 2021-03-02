@@ -45,13 +45,13 @@ class AccountView(FormView):
     template_name = 'users/account.html'
     success_url = '/'
 
-    def get_context_data(self, **kwargs):
-        context = super(AccountView, self).get_context_data(**kwargs)
-        context['form'].fields['username'] = self.request.user.username
-        context['username'] = self.request.user.username
-        context['first_name'] = self.request.user.first_name
-        context['last_name'] = self.request.user.last_name
-        return super().get_context_data(**context)
+    # def get_context_data(self, **kwargs):
+    #     context = super(AccountView, self).get_context_data(**kwargs)
+    #     context['form'].fields['username'] = self.request.user.username
+    #     context['username'] = self.request.user.username
+    #     context['first_name'] = self.request.user.first_name
+    #     context['last_name'] = self.request.user.last_name
+    #     return super().get_context_data(**context)
 
     def form_valid(self, form):
         user = form.save()

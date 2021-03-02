@@ -2,7 +2,7 @@ from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.http import HttpResponseRedirect
 from django.views.generic import ListView, DetailView, CreateView, UpdateView
 from django.urls import reverse_lazy
-from .models import Blog, Images
+# from .models import Blog, Images
 from .forms import *
 
 
@@ -21,17 +21,24 @@ class BlogDetailView(DetailView):
 
 
 class AddBlogView(PermissionRequiredMixin, CreateView):
-    # model = Blog
     form_class = EditBlogForm
     template_name = 'app_blog/add_blog.html'
     success_url = reverse_lazy('BlogListView')
     permission_required = 'app_blog.add_blog'
 
     def form_valid(self, form):
-        form.save()
-        blog_save = form.save()
-        for image in self.request.POST.getlist('images'):
-            Images.objects.create(image=image, blog=blog_save)
+        save_user = self.request.user
+        blog_save = Blog(
+            user=save_user,
+            title=form.cleaned_data['title'],
+            description=form.cleaned_data['description'],
+        )
+        blog_save.save()
+        for get_image in self.request.POST.getlist('images'):
+            image_save = Images(
+                image=get_image,
+                blog=blog_save)
+            image_save.save()
         return HttpResponseRedirect('/')
 
 
@@ -42,18 +49,10 @@ class EditBlogView(PermissionRequiredMixin, UpdateView):
     success_url = reverse_lazy('BlogListView')
     permission_required = 'app_blog.change_blog'
 
-    # def get_context_data(self, **kwargs):
-    #     context = super(EditBlogView, self).get_context_data(**kwargs)
-    #     if self.request.POST:
-    #         context['image_form'] = ImagesForm(self.request.POST)
-    #     else:
-    #         context['image_form'] = ImagesForm()
-    #     return super().get_context_data(**context)
-
     def form_valid(self, form):
-        context = self.get_context_data()
-        image_form = context['image_form']
-        if image_form.is_valid():
-            for item in image_form.fields['image']:
-                Images.objects.create(image=item)
-
+        blog_save = form.save()
+        for get_image in self.request.POST.getlist('images'):
+            image_save, created = Images.objects.get_or_create(
+                image=get_image,
+                blog=blog_save)
+        return HttpResponseRedirect('/')

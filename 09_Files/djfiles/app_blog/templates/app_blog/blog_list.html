@@ -34,7 +34,7 @@
                 <a href="{% url 'EditBlogView' blogitem.pk %}">Редактировать запись</a>
             {% endif %}
             <p>{{ blogitem.description|truncatechars:100 }}</p>
-                {% for image in  blogitem.image_link.all %}
+                {% for image in blogitem.image_link.all %}
                     <img src="{{ image.image.url }}" height="150" >
                 {% endfor %}
             <p>Дата создания: {{ blogitem.created_at }}</p>

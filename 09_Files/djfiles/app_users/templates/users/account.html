@@ -11,8 +11,11 @@
     <p>Пользователь: {{ form.username }}</p>
     <p>Имя: {{ form.first_name }} </p>
     <p>Фамилия: {{ form.last_name }} </p>
-    <p>Аватар: {{ form.UserAvatar.avatar }} </p>
-    {{ user.get_profile.avatar }}"
+    <p>Аватар: {{ form.user_link }} </p>
+{#    {% for ava in  form.user_link.all %}#}
+{#        <img src="{{ ava.avatar.url }}" height="250" >#}
+{#    {% endfor %}#}
+    <img src=path/to/images/{{ user.get_profile.avatar }}">
     <button type="submit">Сохранить</button>
 </form>
 <p><a href="/">Главная</a></p>

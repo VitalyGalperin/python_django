@@ -8,9 +8,7 @@
     <p><a href="/">Главная</a></p>
     <form  method="post">
         {% csrf_token %}
-        <p>Заголовок {{ form.title }}</p>
-        <p>Запись {{ form.description }}</p>
-        <p>Иллюстации1 {{ form.images }}</p>
+        {{ form.as_p}}
         <p><button type="submit">Сохранить</button></p>
     </form>
 

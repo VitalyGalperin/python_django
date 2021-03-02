@@ -3,8 +3,8 @@ from django.db import models
 
 
 class UserProfile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, verbose_name='Пользователь')
-    avatar = models.FileField(upload_to='images/%Y/%m/%d', blank=True, verbose_name='Аватар')
+    user = models.OneToOneField(User, on_delete=models.CASCADE, verbose_name='Пользователь', related_name='user_link')
+    avatar = models.ImageField(upload_to='images/%Y/%m/%d', blank=True, verbose_name='Аватар')
 
     def __str__(self):
         return self.user
