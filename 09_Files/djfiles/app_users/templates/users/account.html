@@ -6,16 +6,13 @@
 </head>
 <body>
 <h2>Изменить аккаунт</h2>
-<form method="post">
+<form method="post"  enctype="multipart/form-data">
     {% csrf_token %}
     <p>Пользователь: {{ form.username }}</p>
     <p>Имя: {{ form.first_name }} </p>
     <p>Фамилия: {{ form.last_name }} </p>
-    <p>Аватар: {{ form.user_link }} </p>
-{#    {% for ava in  form.user_link.all %}#}
-{#        <img src="{{ ava.avatar.url }}" height="250" >#}
-{#    {% endfor %}#}
-    <img src=path/to/images/{{ user.get_profile.avatar }}">
+    <p>Аватар: {{ form.avatar }} </p>
+    <p><img src="{{ request.user.avatar_link.avatar.url }}" height="250"></p>
     <button type="submit">Сохранить</button>
 </form>
 <p><a href="/">Главная</a></p>

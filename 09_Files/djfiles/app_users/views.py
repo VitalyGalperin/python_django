@@ -1,9 +1,6 @@
 from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.mixins import LoginRequiredMixin
-
-from django.contrib.auth.models import User
-from django.shortcuts import render, redirect
-from django.views.generic import DetailView, FormView
+from django.http import HttpResponseRedirect
+from django.views.generic import FormView, UpdateView
 from django.contrib.auth.views import LoginView, LogoutView
 from .models import UserProfile
 from .forms import *
@@ -23,48 +20,35 @@ class Registration2View(FormView):
     success_url = '/'
 
     def form_valid(self, form):
-        user = form.save()
+        user_save = form.save()
         avatar = form.cleaned_data['avatar']
-        UserProfile.objects.create(
-            user=user,
-            avatar=avatar,
-        )
+        if avatar:
+            UserProfile.objects.create(
+                user=user_save,
+                avatar=avatar,
+            )
         username = form.cleaned_data['username']
         raw_password = form.cleaned_data['password1']
         user = authenticate(username=username, password=raw_password)
         login(self.request, user)
         return super(Registration2View, self).form_valid(form)
 
-    def form_invalid(self, form):
-        pass
 
-
-class AccountView(FormView):
+class AccountView(UpdateView):
     model = User
-    form_class = AvatarRegisterForm
+    form_class = AccountForm
     template_name = 'users/account.html'
     success_url = '/'
 
-    # def get_context_data(self, **kwargs):
-    #     context = super(AccountView, self).get_context_data(**kwargs)
-    #     context['form'].fields['username'] = self.request.user.username
-    #     context['username'] = self.request.user.username
-    #     context['first_name'] = self.request.user.first_name
-    #     context['last_name'] = self.request.user.last_name
-    #     return super().get_context_data(**context)
-
     def form_valid(self, form):
-        user = form.save()
+        user_save = form.save()
         avatar = form.cleaned_data['avatar']
-        UserProfile.objects.create(
-            user=user,
-            avatar=avatar,
-        )
-        username = form.cleaned_data['username']
-        raw_password = form.cleaned_data['password1']
-        user = authenticate(username=username, password=raw_password)
-        login(self.request, user)
-        return super(AccountView, self).form_valid(form)
+        if avatar:
+            old_avatar = UserProfile.objects.filter(user=user_save)
+            old_avatar.delete()
+            UserProfile.objects.create(
+                user=user_save,
+                avatar=avatar,
+            )
+        return HttpResponseRedirect('/')
 
-    def form_invalid(self, form):
-        pass

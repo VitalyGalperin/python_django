@@ -1,6 +1,9 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.urls import reverse
+from datetime import datetime
+
+UPLOAD_PATH = 'media/images/%Y%m%d/'
 
 
 class Blog(models.Model):
@@ -29,3 +32,4 @@ class Images(models.Model):
     class Meta:
         verbose_name = 'Иллюстрация'
         verbose_name_plural = 'Иллюстрации'
+
