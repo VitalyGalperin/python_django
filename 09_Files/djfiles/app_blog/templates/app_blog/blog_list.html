@@ -39,7 +39,11 @@
                 {% for image in blogitem.image_link.all %}
                     <img src="{{ image.image.url }}" height="150" >
                 {% endfor %}
-            <p>Автор: {{ blogitem.user }}; Дата создания: {{ blogitem.created_at }}</p>
+            {% if blogitem.user %}
+                <p>Автор: {{ blogitem.user }}; Дата создания: {{ blogitem.created_at }}</p>
+            {% else %}
+                <p>Дата создания: {{ blogitem.created_at }}</p>
+            {% endif %}
         </li>
     {% endfor %}
     </ul>
