@@ -100,9 +100,9 @@ class UploadCSVView(FormView):
                 blog_save = Blog(
                     title=save_title,
                     description=row[1],
-                    created_at=save_date
                 )
                 blog_save.save()
+                Blog.objects.filter(id=blog_save.id).update(created_at=save_date)
         return HttpResponseRedirect('/')
 
 
