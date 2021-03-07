@@ -5,13 +5,19 @@
     <title>Загрузка статей блога из файла</title>
 </head>
 <body>
-    <p><a href="/">Главная</a></p>
-    <form  method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        {{ form.as_p}}
-        <p><button type="submit">Сохранить</button></p>
-    </form>
+<p><a href="/">Главная</a></p>
+<p>Загрузка записей в блог из файла</p>
+<p>Записи должны быть размещены в файл формата CSV, кодировка UTF-8, разделитель - запятая.</p>
+<p>Первый столбец - заголовок статьи, второй - содержание, третий - дата публикации в формате DD-MM-YYYY</p>
+<p>* При отсутствии даты и при загрузке статьи, дата которой уже прошла, публикация делается текущей датой</p>
 
-    <h1>{{ message }}</h1>
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <p>
+        <button type="submit">Сохранить</button>
+    </p>
+</form>
+
 </body>
 </html>
