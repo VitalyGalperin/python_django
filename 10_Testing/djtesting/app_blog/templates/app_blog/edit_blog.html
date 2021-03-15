@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Статья блога</title>
+</head>
+<body>
+    <p><a href="/">Главная</a></p>
+    <form  method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <p>Заголовок {{ form.title }}</p>
+        <p>Запись {{ form.description }}</p>
+        {% for image in  blog.image_link.all %}
+            <img src="{{ image.image.url }}" height="250" >
+        {% endfor %}
+        <p>Иллюстации {{ form.images }}</p>
+
+        <p><button type="submit">Сохранить</button></p>
+    </form>
+</body>
+</html>
