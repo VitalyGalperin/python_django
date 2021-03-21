@@ -57,7 +57,7 @@ class AccountView(UpdateView):
 
 def restore_password(request):
     if request.method == 'POST':
-        form = RestorePasswordForm()
+        form = RestorePasswordForm(request.POST)
         if form.is_valid():
             new_password = User.objects.make_random_password()
             user_email = form.cleaned_data['email']

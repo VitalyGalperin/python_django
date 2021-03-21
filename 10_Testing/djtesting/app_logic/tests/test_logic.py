@@ -38,3 +38,4 @@ class BusinessLogicTest(SimpleTestCase):
         self.assertEqual(work_time_check('24'), False)
         self.assertEqual(work_time_check(True), False)
         self.assertEqual(work_time_check(False), False)
+

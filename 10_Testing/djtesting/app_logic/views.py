@@ -18,6 +18,11 @@ class ItemListView(ListView):
     context_object_name = 'items'
 
 
+# def item_list(request):
+#     items = Item.objects.all()
+#     context = {'items_list': items}
+#     return render(request, 'item_list.html', context=context)
+
 class ItemDetailView(DetailView):
     model = Item
     template_name = 'item_detail.html'

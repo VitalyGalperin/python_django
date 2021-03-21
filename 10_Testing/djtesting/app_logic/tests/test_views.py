@@ -3,7 +3,8 @@ from random import randint
 
 from django.test import TestCase
 from django.urls import reverse
-from ..models import *
+
+from app_logic.models import Item
 
 NUMBER_OF_ITEMS = 10
 
@@ -27,12 +28,15 @@ class ItemsTest(TestCase):
             )
 
     def test_items_exists_at_desired_location(self):
-        response = self.client.get('/app_logic/items')
+        response = self.client.get('/tests/item')
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'tests/item_list.html')
+        self.assertTemplateUsed(response, 'item_list.html')
 
     def test_items_number(self):
-        response = self.client.get(reverse('item_list'))
+        response = self.client.get(reverse('ItemListView'))
         self.assertEqual(response.status_code, 200)
-        self.assertTrue(len(response.context['item_list']) == NUMBER_OF_ITEMS)
+        self.assertTrue(len(response.context_data['items']) == NUMBER_OF_ITEMS)
+        # из лекции для View через функции
+        # self.assertTrue(len(response.context['item_list']) == NUMBER_OF_ITEMS)
+
 

@@ -1,5 +1,5 @@
 from django.apps import AppConfig
 
 
-class ExtraAppConfig(AppConfig):
+class AppLogicConfig(AppConfig):
     name = 'app_logic'

@@ -10,6 +10,7 @@
     <h3>Добро пожаловать, {{ request.user.username }}
         <img src="{{ request.user.avatar_link.avatar.url }}" height="80"></h3>
     <p><a href="{% url 'account' request.user.pk %}">Изменить аккаунт</a></p>
+    <p><a href="{% url 'restore_password' %}">Восстановление пароля</a></p>
     <p><a href="{% url 'logout' %}">Выйти</a></p>
 {% else %}
     <h3>Вы не авторизованы</h3>
