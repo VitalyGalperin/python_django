@@ -46,7 +46,7 @@ class BlogModelsTest(TestCase):
         test_image = Images.objects.get(id=1)
         self.assertEqual(test_image.blog.title, 'Test title')
 
-    # def test_image_image_field(self):
-    #     test_image = Images.objects.get(id=1)
-    #     self.assertEqual(test_image.image, small_gif)
-
+    def test_image_image_field(self):
+        test_image = Images.objects.get(id=1)
+        self.assertEqual(test_image.image.read(), small_gif)
+        test_image.image.delete()

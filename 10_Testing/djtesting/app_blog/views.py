@@ -68,7 +68,7 @@ class EditBlogView(PermissionRequiredMixin, UpdateView):
         return HttpResponseRedirect('/')
 
 
-class UploadCSVView(FormView):
+class UploadCSVView(PermissionRequiredMixin, FormView):
     form_class = UploadCSVForm
     template_name = 'app_blog/Upload_blog.html'
     success_url = reverse_lazy('BlogListView')
