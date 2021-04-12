@@ -79,10 +79,7 @@ class BlogTest(TestCase):
                                           content_type='application/vnd.ms-excel')
             response = self.client.post(reverse('UploadCSVView'), {'CSV_files': csv_file})
         self.assertTrue(Blog.objects.get(title='title 1'))
-        try:
-            Blog.objects.get(title='title 2')
-        except:
-            self.assertFalse(False)
+        self.assertTrue(Blog.objects.filter(title='title 2').count() == 0)
         self.assertTrue(Blog.objects.get(title='title 3'))
         self.assertRedirects(response, '/')
         os.remove(test_file)

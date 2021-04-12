@@ -3,7 +3,7 @@ from django.core.files.uploadedfile import SimpleUploadedFile
 from django.contrib.auth.models import User
 from app_blog.models import Blog, Images
 
-small_gif = (
+SMALL_GIF = (
     b'\x47\x49\x46\x38\x39\x61\x01\x00\x01\x00\x00\x00\x00\x21\xf9\x04'
     b'\x01\x0a\x00\x01\x00\x2c\x00\x00\x00\x00\x01\x00\x01\x00\x00\x02'
     b'\x02\x4c\x01\x00\x3b'
@@ -21,7 +21,7 @@ class BlogModelsTest(TestCase):
                                         description='Test description',
                                         user=test_user)
         Images.objects.create(blog=test_blog,
-                              image=SimpleUploadedFile(name='test_image.jpg', content=small_gif,
+                              image=SimpleUploadedFile(name='test_image.jpg', content=SMALL_GIF,
                                                        content_type='image/jpeg'))
 
     def test_blog_fields_names(self):
@@ -48,5 +48,5 @@ class BlogModelsTest(TestCase):
 
     def test_image_image_field(self):
         test_image = Images.objects.get(id=1)
-        self.assertEqual(test_image.image.read(), small_gif)
+        self.assertEqual(test_image.image.read(), SMALL_GIF)
         test_image.image.delete()
