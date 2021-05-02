@@ -4,6 +4,10 @@ from django.utils.formats import date_format
 import datetime
 
 
+def welcome(request, *args, **kwargs):
+    return render(request, 'welcome.html')
+
+
 def translation_example(request, *args, **kwargs):
     return render(request, 'translation_example.html')
 

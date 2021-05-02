@@ -1,6 +1,6 @@
 from _csv import reader
 from decimal import Decimal
-from io import StringIO
+from django.utils.translation import gettext as _
 
 from django.http import HttpResponse
 from django.shortcuts import render
@@ -23,7 +23,8 @@ def update_prices(request):
             csv_reader = reader(price_str, delimiter=",", quotechar='"')
             for row in csv_reader:
                 Item.objects.filter(code=row[0]).update(price=Decimal(row[1]))
-            return HttpResponse(content='Цены были успешно обновлены', status=200)
+            # return HttpResponse(content='Цены были успешно обновлены', status=200)
+            return HttpResponse(content=_('Prices have been successfully updated'), status=200)
     else:
         upload_file_form = UploadPriceFileForm()
 

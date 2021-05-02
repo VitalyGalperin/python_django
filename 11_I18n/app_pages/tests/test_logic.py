@@ -1,6 +1,6 @@
 from django.test import SimpleTestCase
 
-from app_logic.helpers import check_access_by_age
+from app_pages.helpers import check_access_by_age
 
 
 class BusinessLogicTest(SimpleTestCase):

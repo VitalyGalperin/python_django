@@ -1,0 +1,22 @@
+{% load i18n %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>{% trans "Upload articles from file" %}</title>
+</head>
+<body>
+<p><a href="/">{% trans "Main" %}</a></p>
+<p>{% trans "Upload articles from file" %}</p>
+<p>{% trans "Records must be placed in a CSV file, UTF-8 encoding, the separator is the comma." %}</p>
+<p>{% trans "The first column is the title of the article, the second is the content, the third is the publication date in DD-MM-YYYY format" %}</p>
+<p>{% trans "* In the absence of a date and when uploading an article whose date has already passed, the publication is made as the current date." %}</p>
+
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <p><button type="submit">{% trans "Save" %}</button></p>
+</form>
+
+</body>
+</html>

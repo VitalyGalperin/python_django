@@ -1,39 +1,30 @@
 from django import forms
-from django.contrib.auth.forms import UserCreationForm
-from django.forms import SelectDateWidget
-
-from app_users.models import User
-
-
-class AuthForm(forms.Form):
-    username = forms.CharField()
-    password = forms.CharField(widget=forms.PasswordInput)
+from django.utils.translation import gettext as _
+from django.contrib.auth.forms import UserCreationForm, UserChangeForm
+from django.contrib.auth.models import User
 
 
-class RegisterForm(UserCreationForm):
-    first_name = forms.CharField(max_length=30, required=False, help_text='Имя')
-    last_name = forms.CharField(max_length=30, required=False, help_text='Фамилия')
-    date_of_birth = forms.DateField(required=False, help_text='Дата рождения',
-                                    widget=SelectDateWidget(years=range(1910, 2020)))
-    city = forms.CharField(max_length=30, required=False, help_text='Город')
+class AvatarRegisterForm(UserCreationForm):
+    first_name = forms.CharField(max_length=30, required=False, label=_('First name'))
+    last_name = forms.CharField(max_length=30, required=False, label=_('Last name'))
+    username = forms.CharField(max_length=30, required=False, label=_('Username'))
+    avatar = forms.ImageField(label='Аватар ', required=False, )
 
     class Meta:
         model = User
-        fields = ('username', 'first_name', 'last_name', 'password1', 'password2',)
+        fields = ('username', 'first_name', 'last_name', 'password1', 'password2', 'avatar')
 
 
-class UploadFileForm(forms.Form):
-    title = forms.CharField(max_length=50)
-    description = forms.CharField(max_length=50)
-    file = forms.FileField()
+class AccountForm(UserChangeForm):
+    first_name = forms.CharField(max_length=30, required=False, label=_('First name'))
+    last_name = forms.CharField(max_length=30, required=False, label=_('Last name'))
+    username = forms.CharField(max_length=30, required=False, label=_('Username'))
+    avatar = forms.ImageField(label='Аватар ', required=False, )
 
-
-class UserForm(forms.ModelForm):
     class Meta:
         model = User
-        fields = ['first_name', 'last_name']
+        fields = ('username', 'first_name', 'last_name', 'avatar')
 
 
 class RestorePasswordForm(forms.Form):
     email = forms.EmailField()
-

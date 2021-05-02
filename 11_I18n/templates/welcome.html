@@ -1,10 +1,21 @@
+{% load i18n %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Главная страница</title>
+    <title>{% trans "Task 11. Additional tasks and examples" %}</title>
 </head>
 <body>
-<h1>Добро пожаловать!</h1>
+<h1>{% trans "Welcome" %}!</h1>
+
+    <nav>
+        <ul>
+            <li><h3><a href="{% url 'example' %}">{% trans "Language info" %}</a></h3></li>
+            <li><h3><a href="{% url 'greetings_page' %}">{% trans "Current time" %}</a></h3></li>
+        </ul>
+    </nav>
+
+<p><a href="/">{% trans "Main" %}</a></p>
+
 </body>
 </html>

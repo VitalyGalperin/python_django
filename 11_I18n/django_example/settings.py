@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
+from decouple import config
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -20,10 +21,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '_08u&km!2!66aareg=(dc7_$sk)&p-f1h@1*mzn_*e9jwp*+=x'
+SECRET_KEY = config('SECRET_KEY')
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = config('DEBUG', cast=bool)
 
 ALLOWED_HOSTS = []
 
@@ -37,8 +37,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'app_logic',
+    # 'app_logic',
     'app_goods.apps.AppGoodsConfig',
+    'app_blog',
     'app_users',
     'app_pages',
 ]
@@ -120,7 +121,8 @@ USE_TZ = True
 LANGUAGES = [
     ('ru', 'Русский'),
     ('en', 'English'),
-    ('de', 'Deutsche'),
+    # ('de', 'Deutsche'),
+    ('he', 'עברית'),
 ]
 
 LOCALE_PATHS = [os.path.join(BASE_DIR, 'locale'),]
@@ -135,4 +137,4 @@ LOGIN_REDIRECT_URL = '/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 MEDIA_URL = '/media/'
 
-AUTH_USER_MODEL = 'app_users.User'
+# AUTH_USER_MODEL = 'app_users.User'

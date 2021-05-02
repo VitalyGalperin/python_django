@@ -16,60 +16,61 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=4; plural=(n == 1 && n % 1 == 0) ? 0 : (n == 2 && n % "
+"1 == 0) ? 1: (n % 10 == 0 && n % 1 == 0 && n > 10) ? 2 : 3;\n"
 
 #: .\app_blog\apps.py:7
 msgid "blogs"
-msgstr ""
+msgstr "בלוגים"
 
 #: .\app_blog\forms.py:7 .\app_blog\templates\app_blog\edit_blog.html:17
 msgid "Images "
-msgstr ""
+msgstr "תמונות "
 
 #: .\app_blog\forms.py:14 .\app_blog\templates\app_blog\edit_blog.html:12
 msgid "Title "
-msgstr ""
+msgstr "כותרת "
 
 #: .\app_blog\forms.py:15 .\app_blog\templates\app_blog\edit_blog.html:13
 msgid "Description "
-msgstr ""
+msgstr "תיאור "
 
 #: .\app_blog\forms.py:20
 msgid "Blog articles in CSV format "
-msgstr ""
+msgstr "מאמרים בבלוג בפורמט CSV"
 
 #: .\app_blog\forms.py:26
 msgid "Allowed uploading only files in CSV format"
-msgstr ""
+msgstr "מותר להעלות רק קבצים בפורמט CSV"
 
 #: .\app_blog\models.py:10
 msgid "Title"
-msgstr ""
+msgstr "כותרת"
 
 #: .\app_blog\models.py:11
 msgid "Description"
-msgstr ""
+msgstr "תיאור"
 
 #: .\app_blog\models.py:12
 msgid "Created at"
-msgstr ""
+msgstr "נוצר ב"
 
 #: .\app_blog\models.py:20
 msgid "Blog"
-msgstr ""
+msgstr "בלוג"
 
 #: .\app_blog\models.py:21
 msgid "Blogs"
-msgstr ""
+msgstr "בלוגים"
 
 #: .\app_blog\models.py:28
 msgid "Image"
-msgstr ""
+msgstr "Image"
 
 #: .\app_blog\templates\app_blog\add_blog.html:6
 #: .\app_blog\templates\app_blog\edit_blog.html:6
 msgid "Blog article"
-msgstr ""
+msgstr "מאמר בבלוג"
 
 #: .\app_blog\templates\app_blog\add_blog.html:9
 #: .\app_blog\templates\app_blog\blog_detail.html:9
@@ -82,40 +83,40 @@ msgstr ""
 #: .\app_users\templates\users\restore_password.html:15
 #: .\templates\translation_example.html:42 .\templates\welcome.html:18
 msgid "Main"
-msgstr ""
+msgstr "ראשי"
 
 #: .\app_blog\templates\app_blog\add_blog.html:13
 #: .\app_blog\templates\app_blog\edit_blog.html:19
 #: .\app_blog\templates\app_blog\upload_blog.html:18
 #: .\app_users\templates\users\account.html:17
 msgid "Save"
-msgstr ""
+msgstr "להציל"
 
 #: .\app_blog\templates\app_blog\blog_list.html:6
 msgid "News"
-msgstr ""
+msgstr "חדשות"
 
 #: .\app_blog\templates\app_blog\blog_list.html:26 .\templates\welcome.html:9
 msgid "Welcome"
-msgstr ""
+msgstr "ברוך הבא"
 
 #: .\app_blog\templates\app_blog\blog_list.html:28
 #: .\app_users\templates\users\account.html:9
 msgid "Change account"
-msgstr ""
+msgstr "שנה חשבון"
 
 #: .\app_blog\templates\app_blog\blog_list.html:29
 #: .\app_users\templates\users\restore_password.html:13
 msgid "Restore password"
-msgstr ""
+msgstr "שחזר את הסיסמה"
 
 #: .\app_blog\templates\app_blog\blog_list.html:30
 msgid "Logout"
-msgstr ""
+msgstr "להתנתק"
 
 #: .\app_blog\templates\app_blog\blog_list.html:32
 msgid "You are not authorized"
-msgstr ""
+msgstr "אינך מורשה"
 
 #: .\app_blog\templates\app_blog\blog_list.html:33
 #: .\app_users\templates\users\account.html:6
@@ -124,180 +125,180 @@ msgstr ""
 #: .\app_users\templates\users\register.html:6
 #: .\app_users\templates\users\restore_password.html:9
 msgid "Login"
-msgstr ""
+msgstr "התחבר"
 
 #: .\app_blog\templates\app_blog\blog_list.html:34
 msgid "Register"
-msgstr ""
+msgstr "להירשם"
 
 #: .\app_blog\templates\app_blog\blog_list.html:37
 msgid "Examples and extra tasks"
-msgstr ""
+msgstr "דוגמאות ומשימות נוספות"
 
 #: .\app_blog\templates\app_blog\blog_list.html:42
 msgid "Add blog"
-msgstr ""
+msgstr "הוסף בלוג"
 
 #: .\app_blog\templates\app_blog\blog_list.html:43
 msgid "Upload from CSV-file"
-msgstr ""
+msgstr "העלאה מקובץ CSV"
 
 #: .\app_blog\templates\app_blog\blog_list.html:52
 msgid "Edit blog"
-msgstr ""
+msgstr "ערוך את הבלוג"
 
 #: .\app_blog\templates\app_blog\blog_list.html:59
 msgid "Author: "
-msgstr ""
+msgstr "מחבר: "
 
 #: .\app_blog\templates\app_blog\blog_list.html:59
 #: .\app_blog\templates\app_blog\blog_list.html:61
 msgid "Created at: "
-msgstr ""
+msgstr "נוצר ב:"
 
 #: .\app_blog\templates\app_blog\blog_list.html:67
 msgid "No blog"
-msgstr ""
+msgstr "אין בלוג"
 
 #: .\app_blog\templates\app_blog\upload_blog.html:6
 #: .\app_blog\templates\app_blog\upload_blog.html:10
 msgid "Upload articles from file"
-msgstr ""
+msgstr "העלה מאמרים מהקובץ"
 
 #: .\app_blog\templates\app_blog\upload_blog.html:11
 msgid ""
-"Records must be placed in a CSV file, UTF-8 encoding, separator is comma."
-msgstr ""
+"Records must be placed in a CSV file, UTF-8 encoding, the separator is the comma."
+msgstr "יש למקם רשומות בקובץ CSV, קידוד UTF-8, המפריד הוא פסיק."
 
 #: .\app_blog\templates\app_blog\upload_blog.html:12
 msgid ""
 "The first column is the title of the article, the second is the content, the "
 "third is the publication date in DD-MM-YYYY format"
-msgstr ""
+msgstr "העמודה הראשונה היא כותרת המאמר, השנייה היא התוכן, השלישית היא תאריך הפרסום בפורמט DD-MM-YYYY"
 
 #: .\app_blog\templates\app_blog\upload_blog.html:13
 msgid ""
 "* In the absence of a date and when uploading an article whose date has "
 "already passed, the publication is made as the current date."
-msgstr ""
+msgstr "* בהעדר תאריך וכשמעלים מאמר שתאריךו כבר עבר, הפרסום נעשה כתאריך הנוכחי."
 
 #: .\app_blog\views.py:97
 msgid "Wrong date format"
-msgstr ""
+msgstr "פורמט תאריך שגוי"
 
 #: .\app_goods\apps.py:7 .\app_goods\models.py:10
 msgid "goods"
-msgstr ""
+msgstr "מוצרים"
 
 #: .\app_goods\models.py:6
 msgid "code"
-msgstr ""
+msgstr "קוד"
 
 #: .\app_goods\models.py:7
 msgid "price"
-msgstr ""
+msgstr "מכר"
 
 #: .\app_goods\models.py:11
 msgid "good"
-msgstr ""
+msgstr "מוצר"
 
 #: .\app_goods\views.py:27
 msgid "Prices have been successfully updated"
-msgstr ""
+msgstr "המחירים עודכנו בהצלחה"
 
 #: .\app_pages\views.py:16
 #, python-format
 msgid "Hello there! Today is %(date)s %(time)s"
-msgstr ""
+msgstr " %(date)s %(time)s שלום לך! היום זה"
 
 #: .\app_users\forms.py:8 .\app_users\forms.py:19
 #: .\app_users\templates\users\account.html:13
 msgid "First name"
-msgstr ""
+msgstr "שם פרטי"
 
 #: .\app_users\forms.py:9 .\app_users\forms.py:20
 #: .\app_users\templates\users\account.html:14
 msgid "Last name"
-msgstr ""
+msgstr "שם משפחה"
 
 #: .\app_users\forms.py:10 .\app_users\forms.py:21 .\app_users\models.py:7
 #: .\app_users\templates\users\account.html:12
 msgid "Username"
-msgstr ""
+msgstr "שם משתמש"
 
 #: .\app_users\models.py:8 .\app_users\templates\users\account.html:15
 msgid "Avatar"
-msgstr ""
+msgstr "אוואטר"
 
 #: .\app_users\models.py:14
 msgid "User avatar"
-msgstr ""
+msgstr "אווטאר משתמש"
 
 #: .\app_users\models.py:15
 msgid "User avatars"
-msgstr ""
+msgstr "אווטרים של משתמשים"
 
 #: .\app_users\templates\users\login.html:9
 msgid "Login page"
-msgstr ""
+msgstr "דף כניסה"
 
 #: .\app_users\templates\users\logout.html:6
 msgid "Logout page"
-msgstr ""
+msgstr "דף התנתקות"
 
 #: .\app_users\templates\users\logout.html:9
 msgid "You are logged out of your account"
-msgstr ""
+msgstr "אתה מחובר מהחשבון שלך"
 
 #: .\app_users\templates\users\register.html:9
 #: .\app_users\templates\users\register.html:13
 msgid "Registration"
-msgstr ""
+msgstr "הרשמה"
 
 #: .\app_users\templates\users\restore_password.html:6 .\app_users\views.py:70
 msgid "Password recovery"
-msgstr ""
+msgstr "שחזור סיסמא"
 
 #: .\app_users\views.py:75
 msgid "Email sent successfully"
-msgstr ""
+msgstr "דואר אלקטרוני נשלח בהצלחה"
 
 #: .\example_app_users\views.py:40
 msgid "You are successfully logged in"
-msgstr ""
+msgstr "נכנסת בהצלחה"
 
 #: .\templates\goods\items_list.html:3
 msgid "Goods list"
-msgstr ""
+msgstr "רשימת מוצרים"
 
 #: .\templates\goods\items_list.html:23
 msgid "Goods list is empty"
-msgstr ""
+msgstr "רשימת המוצרים ריקה"
 
 #: .\templates\greetings.html:6
 msgid "What time is it?"
-msgstr ""
+msgstr "מה השעה?"
 
 #: .\templates\translation_example.html:6
 msgid "Our translation page title."
-msgstr "Der Titel unserer Übersetzungsseite."
+msgstr "כותרת דף התרגום שלנו."
 
 #: .\templates\translation_example.html:9
 msgid "Translated text."
-msgstr "Übersetzter Text."
+msgstr "טקסט מתורגם."
 
 #: .\templates\translation_example.html:23
 msgid "Welcome to our page"
-msgstr ""
+msgstr "ברוך הבא לדף שלנו"
 
 #: .\templates\welcome.html:6
-msgid "Task 11. Additional tasks and examplesЗадание 11."
-msgstr ""
+msgid "Task 11. Additional tasks and examples"
+msgstr "משימה 11. משימות ודוגמאות נוספות"
 
 #: .\templates\welcome.html:13
 msgid "Language info"
-msgstr ""
+msgstr "מידע על לשון"
 
 #: .\templates\welcome.html:14
 msgid "Current time"
-msgstr ""
+msgstr "זמן נוכחי"

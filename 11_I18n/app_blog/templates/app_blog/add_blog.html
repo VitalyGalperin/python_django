@@ -1,0 +1,18 @@
+{% load i18n %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>{% trans "Blog article" %}</title>
+</head>
+<body>
+    <p><a href="/">{% trans "Main" %}</a></p>
+    <form  method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p}}
+        <p><button type="submit">{% trans "Save" %}</button></p>
+    </form>
+
+    <h1>{{ message }}</h1>
+</body>
+</html>

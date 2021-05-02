@@ -9,7 +9,7 @@
 <p>{% trans "Translated text." %}</p>
 
 {% get_current_language as LANGUAGE_CODE %}
-{% get_language_info for 'ja' as lang %}
+{% get_language_info for LANGUAGE_CODE as lang %}
 Language code: {{ lang.code }}<br>
 Name of language: {{ lang.name_local }}<br>
 Name in English: {{ lang.name }}<br>
@@ -38,5 +38,7 @@ Name in the active language: {{ lang.name_translated }}
     </select>
     <input type="submit" value="Go">
 </form>
+
+<p><a href="/">{% trans "Main" %}</a></p>
 </body>
 </html>

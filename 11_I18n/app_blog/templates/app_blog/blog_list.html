@@ -1,0 +1,71 @@
+{% load i18n %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>{% trans "News" %}</title>
+</head>
+<body>
+
+<form action="{% url 'set_language' %}" method="post">{% csrf_token %}
+    <input name="next" type="hidden" value="{{ redirect_to }}">
+    <select name="language">
+        {% get_current_language as LANGUAGE_CODE %}
+        {% get_available_languages as LANGUAGES %}
+        {% get_language_info_list for LANGUAGES as languages %}
+        {% for language in languages %}
+            <option value="{{ language.code }}"{% if language.code == LANGUAGE_CODE %} selected{% endif %}>
+                {{ language.name_local }} ({{ language.code }})
+            </option>
+        {% endfor %}
+    </select>
+    <input type="submit" value="Go">
+</form>
+
+{% if request.user.is_authenticated %}
+    <h3>{% trans "Welcome" %}, {{ request.user.username }}
+        <img src="{{ request.user.avatar_link.avatar.url }}" height="80"></h3>
+    <p><a href="{% url 'account' request.user.pk %}">{% trans "Change account" %}</a></p>
+    <p><a href="{% url 'restore_password' %}">{% trans "Restore password" %}</a></p>
+    <p><a href="{% url 'logout' %}">{% trans "Logout" %}</a></p>
+{% else %}
+    <h3>{% trans "You are not authorized" %}</h3>
+    <p><a href="{% url 'login' %}">{% trans "Login" %}</a></p>
+    <p><a href="{% url 'register' %}">{% trans "Register" %}</a></p>
+{% endif %}
+
+<p><a href="{% url 'welcome' %}">{% trans "Examples and extra tasks" %}</a></p>
+
+<br>
+
+{% if perms.app_blog.add_blog %}
+    <p><a href="{% url 'AddBlogView' %}">{% trans "Add blog" %}</a></p>
+    <p><a href="{% url 'UploadCSVView' %}">{% trans "Upload from CSV-file" %}</a></p>
+{% endif %}
+
+{% if blog %}
+    <ul>
+    {% for blogitem in blog %}
+        <li>
+            <h3><a href="{% url 'BlogDetailView' blogitem.pk %}">{{ blogitem.title }}</a></h3>
+            {% if perms.app_blog.change_blog %}
+                <a href="{% url 'EditBlogView' blogitem.pk %}">{% trans "Edit blog" %}</a>
+            {% endif %}
+            <p>{{ blogitem.description|truncatechars:100 }}</p>
+                {% for image in blogitem.image_link.all %}
+                    <img src="{{ image.image.url }}" height="150" >
+                {% endfor %}
+            {% if blogitem.user %}
+                <p>{% trans "Author: " %}{{ blogitem.user }}; {% trans "Created at: " %}{{ blogitem.created_at }}</p>
+            {% else %}
+                <p>{% trans "Created at: " %}{{ blogitem.created_at }}</p>
+            {% endif %}
+        </li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>{% trans "No blog" %}</p>
+{% endif %}
+
+</body>
+</html>
